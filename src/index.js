@@ -1,10 +1,9 @@
-
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import registerServiceWorker from './registerServiceWorker';
-import Controller from './screen/Controller';
+import Header from './common/header/Header'
 
 /*Rendering Login component as home page*/ 
-ReactDOM.render(<Controller />, document.getElementById('root'));
+ReactDOM.render(<Header />, document.getElementById('root'));
 registerServiceWorker();
