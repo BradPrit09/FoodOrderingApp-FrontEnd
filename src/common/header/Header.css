@@ -1,0 +1,40 @@
+/*CSS file for header component*/
+
+/*app-header class contains the style properties of <header> tag in Header.js*/
+.app-header {   
+    overflow: hidden;                    
+    background-color: #263238;
+    height: 36px;
+    padding: 8px 32px 8px 16px;
+}
+
+/*app-logo class contains the style properties of logo in Header.js*/
+.app-logo {
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 20px;
+    background-color:  #fff;
+    padding: 8px 0px;
+    width:'30%';
+}
+
+.tabs {
+    margin-bottom: 10px;
+}
+
+.dispNone {
+    display: none;
+}
+ .dispBlock {
+    display: block;
+}
+ .red {
+    color: red;
+}
+
+.login-button {
+    margin-left: 66%;
+}
+
+.login-button2 {
+    margin-left: 89%;
+}
