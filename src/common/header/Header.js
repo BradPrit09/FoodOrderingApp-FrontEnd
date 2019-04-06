@@ -388,10 +388,12 @@ class Header extends Component {
                     {this.state.value === 0 &&
                         <TabContainer>
                             <FormControl required>
+
                                 <InputLabel htmlFor="contactNo">Contact No.</InputLabel>
                                 <Input id="contactNo" type="text" contact={this.state.contactNo} onChange={this.inputcontactNoChangeHandler} />
                                 <FormHelperText className={this.state.contactNoRequired}>
                                     <span className="red">required</span>
+
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -399,7 +401,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="password">Password</InputLabel>
                                 <Input id="loginPassword" type="password" loginpassword={this.state.loginPassword} onChange={this.inputLoginPasswordChangeHandler} />
                                 <FormHelperText className={this.state.loginPasswordRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -412,7 +414,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="firstname">First Name</InputLabel>
                                 <Input id="firstname" type="text" firstname={this.state.firstname} onChange={this.inputFirstNameChangeHandler} />
                                 <FormHelperText className={this.state.firstnameRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -420,7 +422,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="lastname">Last Name</InputLabel>
                                 <Input id="lastname" type="text" lastname={this.state.lastname} onChange={this.inputLastNameChangeHandler} />
                                 <FormHelperText className={this.state.lastnameRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -428,7 +430,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="email">Email</InputLabel>
                                 <Input id="email" type="text" email={this.state.email} onChange={this.inputEmailChangeHandler} />
                                 <FormHelperText className={this.state.emailRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -436,7 +438,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="registerPassword">Password</InputLabel>
                                 <Input id="registerPassword" type="password" registerpassword={this.state.registerPassword} onChange={this.inputRegisterPasswordChangeHandler} />
                                 <FormHelperText className={this.state.registerPasswordRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -444,7 +446,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="contact">Contact No.</InputLabel>
                                 <Input id="contact" type="text" contact={this.state.contact} onChange={this.inputContactChangeHandler} />
                                 <FormHelperText className={this.state.contactRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
