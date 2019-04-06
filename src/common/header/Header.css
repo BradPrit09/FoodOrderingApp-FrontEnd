@@ -1,0 +1,67 @@
+/*css for the header component*/
+.form-control {
+    width: 80%;
+
+}
+.category-menu {
+    color: #ffffff!important;
+    padding-left: 5%;
+}
+.account-circle {
+    padding-right: 10%;
+}
+.app-header {
+    background-color: #263238;
+    color: #ffffff;
+    padding: 8px 32px 8px 16px;
+}
+.searchIcon {
+    height: 100%;
+    position: absolute;
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+}
+.inputInput {
+    padding-left: 10%;
+   width: 80%;
+    color: whitesmoke!important;
+}
+
+.tabs {
+    margin-bottom: 20px;
+}
+
+.dispNone {
+    display: none;
+}
+
+.dispBlock {
+    display: block;
+}
+
+.red {
+    color: red;
+}
+.user-profile-drop-down {
+    position: relative;
+    right: 16px;
+    background: #dfdfdf;
+    padding: 16px;
+    border-radius: 6px;
+    margin-top: 3px;
+    display: block;
+}
+
+.my-account-dropdown-menu-item, .logout-dropdown-menu-item {
+    text-decoration: none;
+    color: #000;
+    cursor: pointer;
+}
+
+
+@media only screen and (min-width: 768px) {
+   .login-button {
+       float: right;
+   }
+}
