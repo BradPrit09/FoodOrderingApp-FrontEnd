@@ -273,23 +273,32 @@ class Details extends Component {
                                         <span key={"category" + category.id}>{category.categoryName}, </span>
                                     ))}
                                 </Typography>
-                                <FontAwesomeIcon icon="star" />
-                                <span className="details-rating">{restaurantDetails.userRating}</span>
-                                <span className="details-pricesymbol">
-                                    <FontAwesomeIcon icon="rupee-sign" />
-                                </span>
-                                <span className="details-price">
-                                    {restaurantDetails.avgPrice * 2}</span>
-                                <Typography variant="caption">
-                                    <span>AVERAGE RATING BY </span>
-                                    <span className="details-rightText">AVERAGE COST FOR</span>
-                                </Typography>
-                                <Typography variant="caption">
-                                    <span className="details-usersRated">{restaurantDetails.numberUsersRated} </span>
-                                    <span className="details-userstext">USERS</span>
-                                    <span className="details-rightText">TWO PEOPLE</span>
-                                </Typography>
                             </span>
+                            <div className="details-rating-price">
+                                <div className="details-users">
+                                    <div>
+                                        <FontAwesomeIcon icon="star" size="lg" />
+                                        <span className="details-rating">{restaurantDetails.userRating}</span>
+                                    </div>
+                                    <div>
+                                        <Typography variant="caption">
+                                            <span>AVERAGE RATING BY </span>
+                                            <br />
+                                            <span className="details-usersRated">{restaurantDetails.numberUsersRated} </span>
+                                            <span>USERS</span>
+                                        </Typography>
+                                    </div>
+                                </div>
+                                <div className="details-pricing">
+                                    <div className="details-price">
+                                        <FontAwesomeIcon icon="rupee-sign" size="lg" />
+                                        <span className="details-rating">{restaurantDetails.avgPrice * 2}</span>
+                                    </div>
+                                    <div className="details-price">
+                                        <Typography variant="caption">AVERAGECOSTFOR TWOPEOPLE</Typography>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div className="menu-cart-items">

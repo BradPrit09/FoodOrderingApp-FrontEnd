@@ -16,34 +16,46 @@
     display: flex;
     flex-direction: column;
     padding: 2%;
-    width: 70%;
+    width: auto;
+    max-width: 100%;
+}
+
+.details-rating-price {
+    display: flex;
+    flex-direction: row;
+    width: auto;
+}
+
+.details-users {
+    display: flex;
+    flex-direction: column;
+    width: auto;
+    max-width: 60%;
+}
+
+.details-pricing{
+    padding-top: 4px;
+    padding-left: 80%;
+    width:auto;
+}
+
+.details-rating {
+    font-weight: 500;
+    font-size: 18px;
+    width:auto;
+    padding-left: 4px;
 }
 
 .details-usersRated {
-    font-size: 14px;
-    text-decoration: darkgray;
-    font-weight: bold
+    text-decoration: lightgray;
+    font-weight: bold;
 }
 
-.details-userstext{
-    padding-right: 7%;
-}
-.details-rating {
-    font-weight: 500;
-    font-size: 20px;
-}
 .details-price {
-    padding-left: 4px;
-    font-weight: 500;
-    font-size: 20px;
+    display: flex;
+    flex-direction: row;
 }
 
-.details-pricesymbol {
-    padding-left: 70%;
-}
-.details-rightText {
-    padding-left: 60%;
-}
 .restaurant-image{
     height: 200px;
     width: 200px;
