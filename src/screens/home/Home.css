@@ -1,0 +1,27 @@
+.main-body-container {
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+.image-post {
+    margin:10px;
+}
+
+img {
+    object-fit: cover;
+    width:100%;
+}
+
+.card-header.title {
+    font-weight: bold;
+}
+
+.tags {
+    color: #0AA9D8;
+}
+
+.rating{
+    background-color: #CCCC00;
+    color: white;
+}
