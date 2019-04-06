@@ -16,10 +16,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-
-import Checkout from '../Checkout/Checkout';
+import Checkout from '../../screens/checkout/Checkout';
 import ReactDOM from 'react-dom';
-
 
 import './Details.css';
 library.add(faStar);
@@ -242,7 +240,7 @@ class Details extends Component {
 
     onClickCheckoutButton = state => () => {
         // this.setState({ open: true, ...state });
-       ReactDOM.render(<Checkout />, document.getElementById('root'));
+       ReactDOM.render(<Checkout cartItems={this.state.cartItems} totalCartItemsValue={this.state.totalCartItemsValue}/>, document.getElementById('root'));
     };
 
     handleClose = () => {

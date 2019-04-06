@@ -1,3 +1,4 @@
+    
 import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -22,47 +23,69 @@ import ReactDOM from 'react-dom';
 import './Header.css';
 
 const styles = theme => ({
+    root: {
+        width: '100%',
+    },
+    menuroot: {
+        display: 'flex',
+    },
 
-  root: {
-    width: '100%',
-  },
-  menuroot: {
-    display: 'flex',
-  },
-  search: {
-    position: 'relative',
-    borderRadius: '4px',
-    backgroundColor: '#263238',
-    width: '300px',
-    left: '35%',
-  },
-  searchIcon: {
-    width: theme.spacing.unit * 6,
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#fff',
-  },
-  inputRoot: {
-    width: '100%',
-  },
-  inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 5,
-    color:'#fff',
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: 250,
-      '&:focus': {
-        width: 250,
-      },
+    profileicon: {
+        marginRight: theme.spacing.unit,
+        fontSize: 20,
 
+    },
+    search: {
+        position: 'relative',
+        borderRadius: '4px',
+        backgroundColor: '#263238',
+        width: '300px',
+        left: '36%',
+    },
+    searchIcon: {
+        width: theme.spacing.unit * 6,
+        height: '100%',
+        position: 'absolute',
+        pointerEvents: 'none',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        color: '#fff',
+    },
+    inputRoot: {
+        width: '100%',
+    },
+    inputInput: {
+        paddingTop: theme.spacing.unit,
+        paddingRight: theme.spacing.unit,
+        paddingBottom: theme.spacing.unit,
+        paddingLeft: theme.spacing.unit * 5,
+        color: '#fff',
+        transition: theme.transitions.create('width'),
+        width: '100%',
+        [theme.breakpoints.up('sm')]: {
+            width: 250,
+            '&:focus': {
+                width: 250,
+            },
+        },
+    },
+    iconbtn: {
+        marginRight: 2,
+        marginLeft: 10,
+    },
+    profileiconbtn: {
+        //marginLeft: '66%',
+    },
+    avatar: {
+        width: 24,
+        height: 24,
+    },
+    menuList: {
+        backgroundColor: '#c0c0c0',
+    },
+    menuitem: {
+        padding: '8px',
     },
 });
 
@@ -366,12 +389,10 @@ class Header extends Component {
                     {this.state.value === 0 &&
                         <TabContainer>
                             <FormControl required>
-
                                 <InputLabel htmlFor="contactNo">Contact No.</InputLabel>
                                 <Input id="contactNo" type="text" contact={this.state.contactNo} onChange={this.inputcontactNoChangeHandler} />
                                 <FormHelperText className={this.state.contactNoRequired}>
                                     <span className="red">required</span>
-
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -379,7 +400,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="password">Password</InputLabel>
                                 <Input id="loginPassword" type="password" loginpassword={this.state.loginPassword} onChange={this.inputLoginPasswordChangeHandler} />
                                 <FormHelperText className={this.state.loginPasswordRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -392,7 +413,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="firstname">First Name</InputLabel>
                                 <Input id="firstname" type="text" firstname={this.state.firstname} onChange={this.inputFirstNameChangeHandler} />
                                 <FormHelperText className={this.state.firstnameRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -400,7 +421,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="lastname">Last Name</InputLabel>
                                 <Input id="lastname" type="text" lastname={this.state.lastname} onChange={this.inputLastNameChangeHandler} />
                                 <FormHelperText className={this.state.lastnameRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -408,7 +429,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="email">Email</InputLabel>
                                 <Input id="email" type="text" email={this.state.email} onChange={this.inputEmailChangeHandler} />
                                 <FormHelperText className={this.state.emailRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -416,7 +437,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="registerPassword">Password</InputLabel>
                                 <Input id="registerPassword" type="password" registerpassword={this.state.registerPassword} onChange={this.inputRegisterPasswordChangeHandler} />
                                 <FormHelperText className={this.state.registerPasswordRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -424,7 +445,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="contact">Contact No.</InputLabel>
                                 <Input id="contact" type="text" contact={this.state.contact} onChange={this.inputContactChangeHandler} />
                                 <FormHelperText className={this.state.contactRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
