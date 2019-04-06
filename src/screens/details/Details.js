@@ -261,7 +261,7 @@ class Details extends Component {
                                                     <Add />
                                                 </IconButton>
                                             </div>
-                                            <div className="div-container"><FontAwesomeIcon icon="rupee-sign" /> {item.totalPrice * item.quantity}</div>
+                                            <div className="div-container"><FontAwesomeIcon icon="rupee-sign" /> {item.totalPrice}</div>
                                         </div>
 
                                     ))}
