@@ -16,8 +16,10 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+
 import Checkout from '../Checkout/Checkout';
 import ReactDOM from 'react-dom';
+
 
 import './Details.css';
 library.add(faStar);
