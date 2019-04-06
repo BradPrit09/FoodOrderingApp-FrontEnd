@@ -1,0 +1,43 @@
+/* Styling for card */
+.main-body-container {
+    margin-top: 20px;
+    margin-left: 50px;
+    margin-right: 50px;
+}
+
+/* Styling for image post */
+.image-post {
+    margin:10px;
+}
+
+/* img styling*/
+img {
+    object-fit: cover;
+    width:1%;
+}
+/* Styling for tittle of card */
+.card-header.title {
+    font-weight: bold;
+}
+
+/* Styling for tags */
+.tags {
+    color: #0AA9D8;
+}
+
+/* Styling for ratings */
+.rating{
+    background-color: #CCCC00;
+    color: white;
+    padding-top: 4px;
+    padding-bottom: 4px;
+    padding-right: 4px;
+    padding-left: 4px
+}
+
+/* Styling for price */
+.price{
+    padding-top: 4px;
+    padding-left: 15%;
+    width:auto;
+}
