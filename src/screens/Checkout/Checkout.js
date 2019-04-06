@@ -103,6 +103,7 @@ class Checkout extends Component {
             statename:"",
             iconClass:"",
             addressClass:"",
+            selectedIndex:"",
             flatRequired: "dispNone",
             cityRequired: "dispNone",
             stateRequired: "dispNone",
@@ -113,45 +114,11 @@ class Checkout extends Component {
             incorrectDetails:"false",
             address : "" ,
             categories : [],
-            totalCartItemsValue: "700",
+            totalCartItemsValue: "",
             orderNotificationMessage:"",
             states:[],
-            selectedAddress:[
-            // {
-            //     "id": 1,
-            //     "flatBuilNo": "501/31 Mahalaxmi SRA CHS",
-            //     "locality": "Prabhadevi",
-            //     "city": "Mumbai",
-            //     "zipcode": "400015",
-            //     "state": {
-            //         "id": 21,
-            //         "stateName": "Maharashtra"
-            //     }
-            // }
-            ],
-            cartItems: [
-                    {
-                        "id": 1,
-                        "itemName": "Hakka Noodles",
-                        "type": "Veg",
-                        "quantity": "1",
-                        "price": "200"
-                    },
-                    {
-                        "id": 2,
-                        "itemName": "Maggi",
-                        "type": "Veg",
-                        "quantity": "1",
-                        "price": "100"
-                    },
-                    {
-                        "id": 3,
-                        "itemName": "Paneer Makhani",
-                        "type": "Veg",
-                        "quantity": "2",
-                        "price": "250"
-                    }
-                    ],
+            selectedAddress:[],
+            cartItems: [],
             paymentModes: [
                     {
                         "id": 1,
@@ -225,9 +192,6 @@ class Checkout extends Component {
     
 
     componentWillMount() {
-
-        console.log("cart items "+this.props.cartItems);
-
         // get address data
         let data = null;
         let xhr = new XMLHttpRequest();
@@ -314,7 +278,7 @@ class Checkout extends Component {
     }
   }
 
-  if (this.state.activeStep === 1) {
+  if (this.state.activeStep === 1 && this.state.value!=="") {
     this.setState(state => ({
       orderPlaced: "dispBlock",
     }));     
@@ -370,32 +334,18 @@ class Checkout extends Component {
       ReactDOM.render(<Checkout />, document.getElementById('root'));
     }
 
-    iconClickHandler = (address) => {
-        console.log("icon "+address.id);
+    iconClickHandler = (address,index) => {
         this.state.addresses.map(obj => (
            obj.id === address.id ?
             this.setState({
                 selectedAddress: address,
+                selectedIndex: index,
                 addressClass: "selectionGrid" ,
                 iconClass: "green"
            })
            :
            console.log("dint match "+obj.id)
          ));
-         
-        //  console.log("icon "+this.state.selectedAddress.id);
-        //  if (this.state.selectedAddress.id === address.id) {
-        //      console.log("selection")
-        //      this.setState({
-        //         addressClass: "selectionGrid" ,
-        //         iconClass: "green"
-        //    })        
-        //  }
-        //  else {
-        //       this.setState({
-        //         addressClass: "grid"
-        //    })                
-        //  }
     }
 
     snackBarCloseHandler = () => {
@@ -408,7 +358,8 @@ class Checkout extends Component {
         let xhr = new XMLHttpRequest();
         let that = this;
         var address = this.state.selectedAddress;
-        var parameters="adrressId="+address.id+"&flatBuilNo="+address.flatBuilNo+"&locality="+address.locality+"&city="+address.city+"&zipcode="+address.zipcode;
+        var parameters="adrressId="+address.id+"&flatBuilNo="+address.flatBuilNo+"&locality="+address.locality+"&city="+address.city
+        +"&zipcode="+address.zipcode+"&stateId="+address.state.id+"&bill="+this.state.totalCartItemsValue;
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
                 that.setState({
@@ -454,16 +405,17 @@ class Checkout extends Component {
                                 {this.state.tabValue === 0 && 
                                 (this.state.addresses.length !==0 ?
                                 <GridList cellHeight={"auto"} className={classes.gridListMain} cols={3}>
-                                    {this.state.addresses.map(address => (
+                                    {this.state.addresses.map((address, i) => (
                                     <GridListTile style={{padding:'20px'}}>
-                                    <div className={this.state.addressClass} style={{ padding:'10px' }}>
+                                    <div id ={i} key={i} className={this.state.selectedIndex === i ? 'selectionGrid' : 'grid'} 
+                                    style={{ padding:'10px' }}>
                                         <Typography style={{ fontSize:'20px',marginRight:'20px',marginBottom:'5px'}}>{address.flatBuilNo}</Typography>
                                         <Typography style={{ fontSize:'20px',marginRight:'20px',marginBottom:'10px'}}>{address.locality}</Typography>
                                         <Typography style={{ fontSize:'20px',marginRight:'20px',marginBottom:'10px'}}>{address.city}</Typography>
                                         <Typography style={{ fontSize:'20px',marginRight:'20px',marginBottom:'10px'}}>{address.state.stateName}</Typography>
                                         <Typography style={{ fontSize:'20px',marginRight:'20px',marginBottom:'10px'}}>{address.zipcode}</Typography>
                                         <IconButton className={this.state.iconClass} style={{marginLeft:'60%'}} 
-                                        onClick={() => this.iconClickHandler(address)}>
+                                        onClick={() => this.iconClickHandler(address,i)}>
                                             <CheckCircle/>
                                         </IconButton>
                                     </div>
