@@ -1,4 +1,3 @@
-    
 .tabs {
     background-color: #3f51b5;
     color: white;
@@ -21,11 +20,23 @@
     width: 800px;
 }
 
-.order-body-container {
-    display: flex;
-    justify-content: flex-end;
+.formControl {
+    display:flex;
 }
 
+.order-body-container {
+    display: flex;
+    justify-content: flex-start;
+}
+
+.veg-item-color{
+    color: green;
+   }
+   
+    .non-veg-color{
+       color: #9A2B13;
+   }
+   
 .main-body-container {
     display: flex;
     justify-content: space-between;
@@ -33,7 +44,7 @@
 
 .body-container {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .div-container {
