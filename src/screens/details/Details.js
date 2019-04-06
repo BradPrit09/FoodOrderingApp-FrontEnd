@@ -16,12 +16,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import Checkout from '../Checkout/Checkout';
+import Checkout from '../../screens/checkout/Checkout';
 import ReactDOM from 'react-dom';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 import './Details.css';
 library.add(faStar);
 library.add(faRupeeSign);
+library.add(faCircle);
 
 const styles = theme => ({
     snackbar: {
@@ -346,9 +348,9 @@ class Details extends Component {
                                     {this.state.cartItems.map(item => (
                                         <div key={"item" + item.id}>
                                             <span>{item.type === 'Veg' &&
-                                                <i className="fa fa-stop-circle-o veg-item-color" aria-hidden="true"></i>}
+                                                <FontAwesomeIcon icon="circle" className="veg-item-color"/>}
                                                 {item.type === 'Non-Veg' &&
-                                                    <i className="fa fa-stop-circle-o non-veg-item-color" aria-hidden="true"></i>}
+                                                    <FontAwesomeIcon icon="circle" className="non-veg-item-color"/>}
                                             </span>
                                             <span>{item.itemName}</span>
                                             <span>

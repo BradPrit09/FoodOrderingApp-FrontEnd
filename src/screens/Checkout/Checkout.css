@@ -29,6 +29,14 @@
     justify-content: flex-start;
 }
 
+.veg-item-color{
+    color: green;
+   }
+   
+    .non-veg-color{
+       color: #9A2B13;
+   }
+   
 .main-body-container {
     display: flex;
     justify-content: space-between;

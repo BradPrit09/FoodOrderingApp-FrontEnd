@@ -29,7 +29,11 @@ import CloseIcon from '@material-ui/icons/Close';
 import ReactDOM from 'react-dom';
 import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
+library.add(faCircle);
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -555,20 +559,20 @@ class Checkout extends Component {
                                     </Typography>
                                     {this.props.cartItems.map(item => (
                                         <div className="order-body-container" key={"item" + item.id}>
-                                            <div>{item.type === 'Veg' &&
-                                                <i className="fa fa-stop-circle-o veg-item-color" aria-hidden="true"></i>}
+                                            <div className="div-container">{item.type === 'Veg' &&
+                                                <FontAwesomeIcon icon="circle" className="veg-item-color"/>}
                                                 {item.type === 'Non-Veg' &&
-                                                    <i className="fa fa-stop-circle-o non-veg-item-color" aria-hidden="true"></i>}
+                                                    <FontAwesomeIcon icon="circle" className="non-veg-color"/>}
                                             </div>
-                                            <div className="div-container">{item.itemName}</div>
+                                            <div className="div-container"> {item.itemName}</div>
                                             <div className="div-container">{item.quantity}</div>
-                                            <div className="div-container">{item.price}</div>
+                                            <div className="div-container"><FontAwesomeIcon icon="rupee-sign" /> {item.price}</div>
                                         </div>
                                     ))}
                                     <Divider/>
                                     <div className="body-container">
                                     <span className="div-container">Net Amount </span>
-                                    <span className="div-container">{this.props.totalCartItemsValue}</span>
+                                    <span className="div-container"><FontAwesomeIcon icon="rupee-sign" /> {this.props.totalCartItemsValue}</span>
                                     </div>
                                     <br />
                                     <Button className="button-container" style={{marginLeft:'140px'}} variant="contained" onClick={this.confirmOrderHandler} color="primary">
