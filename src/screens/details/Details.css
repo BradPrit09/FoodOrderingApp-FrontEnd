@@ -64,6 +64,7 @@
 .menu-cart-items{
     padding: 50px;
     display: flex;
+    justify-content: flex-start;
     flex-direction: row;
     align-items: top;
 }
@@ -76,28 +77,34 @@
     text-transform: uppercase;
 }
 
+.itemContainer {
+    display: flex;
+    align-items: baseline;
+}
+
 .veg-item-color{
  color: green;
 }
 
 .non-veg-item-color{
-    color: red;
+    color: #9A2B13;
+}
+
+.div-container {
+    margin: 8px;
 }
 
 
 .my-cart{
-    margin: 50px 60px auto auto;
+    float: right;
     width: 500px;
+    margin-left: 80px;
 }
 
 .cart-button {
     flex-direction: column;
     width: auto;
     margin-left: 500px;
-}
-
-.cart-price{
-    margin-left: 400px
 }
 
 .cart-display{
