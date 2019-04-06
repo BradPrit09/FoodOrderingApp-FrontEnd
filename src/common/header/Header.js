@@ -19,50 +19,6 @@ import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import './Header.css';
 
-const styles = theme => ({
-  root: {
-    width: '100%',
-  },
-  menuroot: {
-    display: 'flex',
-  },
-  search: {
-    position: 'relative',
-    borderRadius: '4px',
-    backgroundColor: '#263238',
-    width: '300px',
-    left: '35%',
-  },
-  searchIcon: {
-    width: theme.spacing.unit * 5,
-    height: '100%',
-    position: 'absolute',
-    pointerEvents: 'none',
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    color: '#fff',
-    
-  },
-  inputRoot: {
-    width: '100%',
-  },
-  inputInput: {
-    paddingTop: theme.spacing.unit,
-    paddingRight: theme.spacing.unit,
-    paddingBottom: theme.spacing.unit,
-    paddingLeft: theme.spacing.unit * 5,
-    color:'#fff',
-    transition: theme.transitions.create('width'),
-    width: '100%',
-    [theme.breakpoints.up('sm')]: {
-      width: 250,
-      '&:focus': {
-        width: 250,
-      },
-    },
-  },
-});
 
 const customStyles = {
     content: {
