@@ -55,6 +55,7 @@ const styles = theme => ({
     },
 });
 
+
 class Home extends Component {
     constructor() {
         super();
@@ -73,11 +74,12 @@ class Home extends Component {
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
                 that.setState({
-                    restaurantList : JSON.parse(this.responseText)             
+                    restaurantList : JSON.parse(this.responseText),
+                    restaurants: JSON.parse(this.responseText)
                 });
              }
         });
-        xhr.open("GET", "http://localhost:8080/api/restaurant");
+        xhr.open("GET", "http://localhost:8085/api/restaurant");
         xhr.send(data);
     }
 
@@ -87,12 +89,36 @@ class Home extends Component {
         ReactDOM.render(<Details   id={restaurantId}  />, document.getElementById('root'));
     }
 
+    // Calling in on clicking search
+    searchClickHandler = (query) => {
+        if (query !== "") {
+        let xhr = new XMLHttpRequest();
+        let that = this;
+        // store relevant restraunt Details
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                
+                that.setState({
+                    restaurantList : JSON.parse(this.responseText)             
+                });
+             }
+        });
+        xhr.open("GET", "http://localhost:8080/api/restaurant/name/"+query);
+        xhr.send(null);
+        }
+        else {
+            this.setState({
+                restaurantList: this.state.restaurants
+            })
+        }
+    }
+
 
     render() {
         const { classes } = this.props;
         return (
             <div className="home">
-                <Header />
+                <Header searchClickHandler={this.searchClickHandler}/>
                 {/* Map over the List and then display all details of all restaurants. */}
                 {this.state.restaurantList.map((pic,index) => ( console.log(pic.restaurantName)  ))}
 

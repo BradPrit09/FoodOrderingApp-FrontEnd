@@ -173,6 +173,7 @@ class Header extends Component {
         this.setState({
             query: e.target.value
         });
+        console.log("query "+e.target.value);
         this.props.searchClickHandler(e.target.value);
     };
 
