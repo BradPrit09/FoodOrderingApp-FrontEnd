@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -220,6 +219,7 @@ class Header extends Component {
                             message: "Logged in successfully!",
                             snackbarOpen: true,
                         });
+                        sessionStorage.setItem('firstname', userDetails.firstName);
                         that.closeModalHandler();
 
                     }
@@ -569,7 +569,8 @@ class Header extends Component {
                                             </Popper>
                                         </div>
                                         <div className={classes.text}>
-                                            <p>{this.state.firstname}</p>
+                                            {/*<p>{this.state.firstname}</p>*/}
+                                            <p>{sessionStorage.getItem("firstname")}</p>
                                         </div>
                                     </Toolbar>
                                 </AppBar>
