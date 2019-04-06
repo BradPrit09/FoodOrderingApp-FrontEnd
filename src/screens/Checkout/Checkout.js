@@ -218,8 +218,6 @@ class Checkout extends Component {
 
     componentWillMount() {
 
-        console.log("cart items "+this.props.cartItems);
-
         // get address data
         let data = null;
         let xhr = new XMLHttpRequest();
@@ -524,7 +522,7 @@ class Checkout extends Component {
                                     <Typography gutterBottom variant="h5" component="h2">
                                         Summary
                                     </Typography>
-                                    {this.props.cartItems.map(item => (
+                                    {this.state.cartItems.map(item => (
                                         <div className="order-body-container" key={"item" + item.id}>
                                             <div>{item.type === 'Veg' &&
                                                 <i className="fa fa-stop-circle-o veg-item-color" aria-hidden="true"></i>}
@@ -539,7 +537,7 @@ class Checkout extends Component {
                                     <Divider/>
                                     <div className="body-container">
                                     <span className="div-container">Net Amount </span>
-                                    <span className="div-container">{this.props.totalCartItemsValue}</span>
+                                    <span className="div-container">{this.state.totalCartItemsValue}</span>
                                     </div>
                                     <br />
                                     <Button className="button-container" style={{marginLeft:'140px'}} variant="contained" onClick={this.confirmOrderHandler} color="primary">
