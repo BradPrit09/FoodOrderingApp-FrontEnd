@@ -30,13 +30,13 @@
 }
 
 .veg-item-color{
-    color: green;
-   }
-   
-    .non-veg-color{
-       color: #9A2B13;
-   }
-   
+ color: green;
+}
+
+.non-veg-color{
+    color: #9A2B13;
+}
+
 .main-body-container {
     display: flex;
     justify-content: space-between;
@@ -49,12 +49,27 @@
 
 .div-container {
     margin: 8px;
+    margin-left: 10%;
+}
+
+.price-container {
+    min-width: 50px;
+}
+
+.rupee-container {
+    margin: 8px;
+    margin-left: 24%;
+}
+
+.div-items {
+    min-width: 180px;
 }
 
 .orderSummary {
     float: right;
     width: 500px;
     margin-left: 80px;
+    margin-top: 30px;
 }
 
 .selectionGrid {
@@ -67,6 +82,11 @@
     color: green;
 }
 
+.grid {
+    
+}
+
 .button-container {
-    margin-left: 120px;
+    margin-left: 70px;
+    width: 350px;
 }

@@ -92,7 +92,19 @@
 
 .div-container {
     margin: 8px;
-     margin-left: 10%;
+    margin-left: 10%;
+}
+
+.price-container {
+    min-width: 50px;
+}
+
+.plus-container {
+    margin-left: 8px;
+}
+
+.div-items {
+    min-width: 180px;
 }
 
 

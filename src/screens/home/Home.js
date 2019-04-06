@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './Home.css';
 import Header from '../../common/header/Header';
 import { GridListTile, Typography } from '@material-ui/core';
@@ -7,8 +6,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import GridList from '@material-ui/core/GridList';
 import { withStyles } from '@material-ui/core/styles';
-import Details from '../details/Details';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faRupeeSign } from '@fortawesome/free-solid-svg-icons';
@@ -55,6 +52,7 @@ const styles = theme => ({
     },
 });
 
+
 class Home extends Component {
     constructor() {
         super();
@@ -73,7 +71,8 @@ class Home extends Component {
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
                 that.setState({
-                    restaurantList : JSON.parse(this.responseText)             
+                    restaurantList : JSON.parse(this.responseText),
+                    restaurants: JSON.parse(this.responseText)
                 });
              }
         });
@@ -83,8 +82,33 @@ class Home extends Component {
 
     /* This function is called on click of card and it redirects to details page corresponding to the restaurant selected  */
     showRestaurantDetails(restaurantId)
-    {
-        ReactDOM.render(<Details   id={restaurantId}  />, document.getElementById('root'));
+    { 
+        this.props.history.push('/restaurant/'+restaurantId);
+
+    }
+
+    // Calling in on clicking search
+    searchClickHandler = (query) => {
+        if (query !== "") {
+        let xhr = new XMLHttpRequest();
+        let that = this;
+        // store relevant restraunt Details
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                
+                that.setState({
+                    restaurantList : JSON.parse(this.responseText)             
+                });
+             }
+        });
+        xhr.open("GET", "http://localhost:8080/api/restaurant/name/"+query);
+        xhr.send(null);
+        }
+        else {
+            this.setState({
+                restaurantList: this.state.restaurants
+            })
+        }
     }
 
 
@@ -92,7 +116,7 @@ class Home extends Component {
         const { classes } = this.props;
         return (
             <div className="home">
-                <Header />
+                <Header searchClickHandler={this.searchClickHandler}/>
                 {/* Map over the List and then display all details of all restaurants. */}
                 {this.state.restaurantList.map((pic,index) => ( console.log(pic.restaurantName)  ))}
 

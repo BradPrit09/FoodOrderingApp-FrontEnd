@@ -16,8 +16,6 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import Checkout from '../Checkout/Checkout';
-import ReactDOM from 'react-dom';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
 import './Details.css';
@@ -180,7 +178,7 @@ class Details extends Component {
             }
         });
         /**Extracted Dynamically passed restaurantId from params */ 
-        xhr.open("GET", "http://localhost:8080/api/restaurant/" + this.props.id);
+        xhr.open("GET", "http://localhost:8085/api/restaurant/" + this.props.id);
         xhr.send();
     } 
 
@@ -241,8 +239,10 @@ class Details extends Component {
     }
 
     onClickCheckoutButton = state => () => {
-        // this.setState({ open: true, ...state });
-       ReactDOM.render(<Checkout cartItems={this.state.cartItems} totalCartItemsValue={this.state.totalCartItemsValue}/>, document.getElementById('root'));
+        this.props.history.push({
+                pathname: '/checkout',
+                state: { cartItems: this.state.cartItems, totalCartItemsValue: this.state.totalCartItemsValue}
+            })
     };
 
     handleClose = () => {
@@ -314,16 +314,25 @@ class Details extends Component {
                                     <br/>
                                     {category.items.map(item => (
                                         <div className="itemContainer" key={"item" + item.id}>
-                                            <div className="div-container">{item.type === 'Veg' &&
+
+                                            <div className="div-container div-items">{item.type === 'Veg' &&
                                                 <FontAwesomeIcon icon="circle" className="veg-item-color"/>}
                                                 {item.type === 'Non-Veg' &&
-                                                    <FontAwesomeIcon icon="circle" className="non-veg-item-color"/>}
+                                                    <FontAwesomeIcon icon="circle" className="non-veg-item-color"/>} {item.itemName}
                                             </div>
+                                            {/*<div className="div-container"> {item.itemName}</div>*/}
+
+                                            <div className="div-container price-container"> <FontAwesomeIcon icon="rupee-sign" />
+                                            {item.price}</div>
+                                            <div className="plus-container">
+
+
                                             <div className="div-container"> {item.itemName}</div>
 
                                             <div className="div-container"> <FontAwesomeIcon icon="rupee-sign" />
                                             {item.price}</div>
                                             <div className="div-container">
+r
                                                 <IconButton
                                                     key="close"
                                                     aria-label="Close"
@@ -383,7 +392,8 @@ class Details extends Component {
                                     <br />
                                     <br />
                                     <Button variant="contained" color="primary"
-                                        onClick={this.onClickCheckoutButton({ vertical: 'bottom', horizontal: 'left' })}>
+                                        onClick={this.onClickCheckoutButton({ vertical: 'bottom', horizontal: 'left' })}
+                                        >
                                         CHECKOUT
                                     </Button>
                                     <Snackbar

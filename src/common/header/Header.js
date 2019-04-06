@@ -1,4 +1,3 @@
-    
 import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -20,6 +19,13 @@ import ProfileIcon from '@material-ui/icons/AccountCircle';
 import Home from '../../screens/home/Home';
 import Snackbar from '@material-ui/core/Snackbar';
 import ReactDOM from 'react-dom';
+import AccountCircle from '@material-ui/icons/AccountCircle';
+import MenuItem from '@material-ui/core/MenuItem';
+import ClickAwayListener from '@material-ui/core/ClickAwayListener';
+import Grow from '@material-ui/core/Grow';
+import Popper from '@material-ui/core/Popper';
+import MenuList from '@material-ui/core/MenuList';
+import IconButton from '@material-ui/core/IconButton';
 import './Header.css';
 
 const styles = theme => ({
@@ -30,10 +36,8 @@ const styles = theme => ({
         display: 'flex',
     },
 
-    profileicon: {
-        marginRight: theme.spacing.unit,
-        fontSize: 20,
-
+    grow: {
+        flexGrow: 1,
     },
     search: {
         position: 'relative',
@@ -41,6 +45,13 @@ const styles = theme => ({
         backgroundColor: '#263238',
         width: '300px',
         left: '36%',
+    },
+    searchLoggedIn: {
+        position: 'relative',
+        borderRadius: '4px',
+        backgroundColor: '#263238',
+        width: '300px',
+        marginRight: '29%',
     },
     searchIcon: {
         width: theme.spacing.unit * 6,
@@ -74,15 +85,22 @@ const styles = theme => ({
         marginRight: 2,
         marginLeft: 10,
     },
-    profileiconbtn: {
-        //marginLeft: '66%',
-    },
+   
     avatar: {
-        width: 24,
-        height: 24,
+        width: 32,
+        height: 32,
+        color: '#fff',
+    },
+    logo: {
+        width: 40,
+        height: 40,
+    },
+    text: {
+        width:50,
+        marginRight:2,
     },
     menuList: {
-        backgroundColor: '#c0c0c0',
+        backgroundColor: '#fff',
     },
     menuitem: {
         padding: '8px',
@@ -140,7 +158,7 @@ class Header extends Component {
             contactRequired: "dispNone",
             contact: "",
             query: "",
-            loggedIn: false,
+            loggedIn: sessionStorage.getItem("access-token") == null ? false : true,
             registrationSuccess: false,
             message: "",
             accessToken: {},
@@ -155,6 +173,7 @@ class Header extends Component {
         this.setState({
             query: e.target.value
         });
+        console.log("query "+e.target.value);
         this.props.searchClickHandler(e.target.value);
     };
 
@@ -165,17 +184,16 @@ class Header extends Component {
         if (this.state.contactNoRequired === "dispNone" && this.state.loginPasswordRequired === "dispNone") {
             let xhr = new XMLHttpRequest();
             let that = this;
-            var accessToken = "";
 
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4 && this.status === 200) {
 
                     sessionStorage.setItem('access-token', xhr.getResponseHeader("access-token"));
-                    console.log(JSON.parse(xhr.responseText));
-                    console.log(xhr.getResponseHeader("access-token"));
+                    var userDetails = JSON.parse(xhr.responseText);
                     that.setState({
                         loggedIn: true,
                         snackbarOpen: true,
+                        firstname: userDetails.firstName,
                         message: "Logged in successfully!",
                     });
                     that.closeModalHandler();
@@ -208,37 +226,35 @@ class Header extends Component {
         this.state.registerPassword === "" ? this.setState({ registerPasswordRequired: "dispBlock" }) : this.setState({ registerPasswordRequired: "dispNone" });
         this.state.contact === "" ? this.setState({ contactRequired: "dispBlock" }) : this.setState({ contactRequired: "dispNone" });
 
-        if (this.state.contactRequired === "dispBlock" && this.state.registerPasswordRequired === "dispBlock"
-            && this.state.emailRequired === "dispBlock" && this.state.firstnameRequired === "dispBlock") {
+        if (this.state.contactRequired === "dispNone" && this.state.registerPasswordRequired === "dispNone"
+            && this.state.emailRequired === "dispNone" && this.state.firstnameRequired === "dispNone") {
 
-            let number_pattern = "[0-9]";
-            
-           // if (this.state.contact.match(number_pattern) && this.state.contact.length === 10) {
-                
-                
-                 let xhrSignup = new XMLHttpRequest();
-                 let that = this;
-                 xhrSignup.addEventListener("readystatechange", function () {
-                     if (this.readyState === 4 && this.status === 200 ) {
-                         that.setState({
-                             registrationSuccess: true,
-                             snackbarOpen: true,
-                             message:"Registered successfully! Please login now!",
-                         });
-                         that.openModalHandler();
-                         ReactDOM.render(<Home />, document.getElementById('root'));
-                     }
-                 });
-     
-                 xhrSignup.open("POST", "http://localhost:8080/api/user/signup?firstName="
-                 +this.state.firstname+"&lastName="+this.state.lastname+"&email="+this.state.email
-                 +"&contactNumber="+this.state.contact+"&password="+this.state.registerPassword);
-                 xhrSignup.setRequestHeader("Content-Type", "application/jason;CharSet=UTF-8");
-                 xhrSignup.send();
-           /* }
-            else {
-                console.log("invalid number");
-            }*/
+            // if (this.state.contact.match(number_pattern) && this.state.contact.length === 10) {
+
+
+            let xhrSignup = new XMLHttpRequest();
+            let that = this;
+            xhrSignup.addEventListener("readystatechange", function () {
+                if (this.readyState === 4 && this.status === 201) {
+                    that.setState({
+                        registrationSuccess: true,
+                        snackbarOpen: true,
+                        message: "Registered successfully! Please login now!",
+                    });
+                    that.openModalHandler();
+                    //ReactDOM.render(<Home />, document.getElementById('root'));
+                }
+            });
+
+            xhrSignup.open("POST", "http://localhost:8080/api/user/signup?firstName="
+                + this.state.firstname + "&lastName=" + this.state.lastname + "&email=" + this.state.email
+                + "&contactNumber=" + this.state.contact + "&password=" + this.state.registerPassword);
+            xhrSignup.setRequestHeader("Content-Type", "application/jason;CharSet=UTF-8");
+            xhrSignup.send();
+            /* }
+             else {
+                 console.log("invalid number");
+             }*/
         }
     }
 
@@ -272,7 +288,7 @@ class Header extends Component {
     }
 
     tabChangeHandler = (event, value) => {
-        this.state = {
+        this.setState({
             contactNoRequired: "dispNone",
             contactNo: "",
             loginPasswordRequired: "dispNone",
@@ -287,7 +303,7 @@ class Header extends Component {
             registerPassword: "",
             contactRequired: "dispNone",
             contact: "",
-        };
+        });
         this.setState({ value });
     }
 
@@ -296,6 +312,18 @@ class Header extends Component {
  */
     handleToggle = () => {
         this.setState(state => ({ open: !state.open }));
+    };
+
+    /**
+ * Handler for Closing Menu
+ */
+    handleClose = event => {
+        if (this.anchorEl.contains(event.target)) {
+            return;
+        }
+
+        this.setState({ open: false });
+
     };
 
     /**
@@ -312,9 +340,12 @@ class Header extends Component {
         sessionStorage.removeItem("access-token");
 
         this.setState({
-            loggedIn: false
+            loggedIn: false,
+            open: false
         });
 
+        // Redirecting to Login page
+        ReactDOM.render(<Home />, document.getElementById('root'));
     }
 
     openModalHandler = () => {
@@ -349,35 +380,107 @@ class Header extends Component {
         return (
             <div>
                 <header >
-                    <div className={classes.root}>
-                        <MuiThemeProvider theme={theme}>
-                            <AppBar position="static" color='primary'>
-                                <Toolbar>
-                                    <img src={logo} alt="FoodOrderingApp" />
+                    {!this.state.loggedIn &&
+                        <div className={classes.root}>
+                            <MuiThemeProvider theme={theme}>
+                                <AppBar position="static" color='primary'>
+                                    <Toolbar>
+                                        <img src={logo} className={classes.logo} alt="FoodOrderingApp" />
 
-                                    <div className={classes.search}>
-                                        <div className={classes.searchIcon}>
-                                            <SearchIcon />
+                                        <div className={classes.search}>
+                                            <div className={classes.searchIcon}>
+                                                <SearchIcon />
+                                            </div>
+                                            {/**Search Code */}
+                                            <Input
+                                                placeholder="Search by Restaurant Name"
+                                                classes={{
+                                                    root: classes.inputRoot,
+                                                    input: classes.inputInput,
+                                                }} onChange={this.inputChangeHandler}
+                                            />
                                         </div>
-                                        {/**Search Code */}
-                                        <Input
-                                            placeholder="Search by Restaurant Name"
-                                            classes={{
-                                                root: classes.inputRoot,
-                                                input: classes.inputInput,
-                                            }} onChange={this.inputChangeHandler}
-                                        />
-                                    </div>
-                                    <div className="login-button">
-                                        <Button className={classes.prfileicon} variant="contained" size="medium" color="default" onClick={this.openModalHandler}>
-                                            <ProfileIcon className={classes.prfileicon} />
-                                            Login
+                                        <div className="login-button">
+                                            <Button className={classes.prfileicon} variant="contained" size="medium" color="default" onClick={this.openModalHandler}>
+                                                <ProfileIcon className={classes.prfileicon} />
+                                                Login
                                         </Button>
-                                    </div>
-                                </Toolbar>
-                            </AppBar>
-                        </MuiThemeProvider>
-                    </div>
+                                        </div>
+                                    </Toolbar>
+                                </AppBar>
+                            </MuiThemeProvider>
+                        </div>}
+                    {this.state.loggedIn &&
+                        <div className={classes.root}>
+                            <MuiThemeProvider theme={theme}>
+                                <AppBar position="static" color='primary'>
+                                    <Toolbar>
+                                        <img src={logo} className={classes.logo} alt="FoodOrderingApp" />
+                                        <div className={classes.grow} />
+                                        <div className={classes.searchLoggedIn}>
+                                            <div className={classes.searchIcon}>
+                                                <SearchIcon />
+                                            </div>
+                                            {/**Search Code */}
+                                            <Input
+                                                placeholder="Search by Restaurant Name"
+                                                classes={{
+                                                    root: classes.inputRoot,
+                                                    input: classes.inputInput,
+                                                }} onChange={this.inputChangeHandler}
+                                            />
+                                        </div>
+                                        {/**Menu Button Code */}
+                                        <IconButton buttonRef={node => {
+                                            this.anchorEl = node;
+                                        }}
+                                            aria-owns={open ? 'menu-list-grow' : undefined}
+                                            aria-haspopup="true"
+                                            onClick={this.handleToggle} className={classes.iconbtn}>
+                                            {/**View profile */}
+                                            {/*<Avatar src={this.state.profile_pic} className={classes.avatar} alt="profile" />*/}
+                                            <AccountCircle className={classes.avatar} />
+                                        </IconButton>
+                                        <div className={classes.menuroot}>
+                                            <Popper open={open} anchorEl={this.anchorEl} transition>
+                                                {({ TransitionProps, placement }) => (
+
+                                                    <Grow
+                                                        {...TransitionProps}
+                                                        id="menu-list-grow"
+                                                        style={{ transformOrigin: placement === 'bottom' ? 'center top' : 'center bottom' }}
+                                                    >
+                                                        <ClickAwayListener onClickAway={this.handleClose}>
+                                                            <MenuList className={classes.menuList}>
+
+                                                                {/* On clicking login , calling my account handler */}
+                                                                <MenuItem className={classes.menuitem} onClick={this.myAccountHandler}>
+                                                                    My Profile
+                                {/*<Link style={{ textDecoration: 'none', color: 'black' }} to="/profile">My Account</Link>
+                                */}
+                                                                </MenuItem>
+
+                                                                {/* On clicking logout, calling logout handler */}
+                                                                <MenuItem className={classes.menuitem} onClick={this.logoutHandler}>
+                                                                    Logout
+                                {/*<Link style={{ textDecoration: 'none', color: 'black' }} onClick={this.logoutHandler} to="/">Logout</Link>
+                                */}
+                                                                </MenuItem>
+
+                                                            </MenuList>
+                                                        </ClickAwayListener>
+                                                    </Grow>
+
+                                                )}
+                                            </Popper>
+                                        </div>
+                                        <div className={classes.text}>
+                                        <p>{this.state.firstname}</p>
+                                        </div>
+                                    </Toolbar>
+                                </AppBar>
+                            </MuiThemeProvider>
+                        </div>}
                 </header>
                 <Modal ariaHideApp={false} isOpen={this.state.modalIsOpen} contentLabel='Login'
                     onRequestClose={this.closeModalHandler}
