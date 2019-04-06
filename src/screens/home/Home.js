@@ -9,6 +9,14 @@ import GridList from '@material-ui/core/GridList';
 import { withStyles } from '@material-ui/core/styles';
 import Details from '../details/Details';
 
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faRupeeSign } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
+
+library.add(faStar);
+library.add(faRupeeSign);
+
 const styles = theme => ({
     root: {
         flexGrow: 1,
@@ -18,7 +26,7 @@ const styles = theme => ({
         transform: 'translateZ(0)',
     },
     card: {
-        maxWidth: 560,
+        maxWidth: 420,
         margin: 10,
     },
     media: {
@@ -50,48 +58,32 @@ const styles = theme => ({
 class Home extends Component {
     constructor() {
         super();
-        // Intialized State Variables.
+        // Intialized State Variable to store restaurantList
         this.state = {
-            id : "",
-            restaurantName : "" ,
-            photoUrl : "" ,
-            userRating : "" ,
-            avgPrice : "" ,
-            numberUsersRated : "" ,
-            address : "" ,
-            categories : [],
             restaurantList : []
         }
     }
     
-
     componentWillMount() {
-
-        // get restaurant data
+        // get restaurant data from api
         let data = null;
         let xhr = new XMLHttpRequest();
         let that = this;
-        // store relevant details
+        // store relevant restraunt Details
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
                 that.setState({
                     restaurantList : JSON.parse(this.responseText)             
                 });
-
-                console.log( JSON.parse(this.responseText) ) ;            
              }
         });
-
         xhr.open("GET", "http://localhost:8080/api/restaurant");
         xhr.send(data);
     }
 
+    /* This function is called on click of card and it redirects to details page corresponding to the restaurant selected  */
     showRestaurantDetails(restaurantId)
     {
-        console.log(restaurantId);
-        console.log({restaurantId});
-        //console.log({this.restaurantId});
-
         ReactDOM.render(<Details   id={restaurantId}  />, document.getElementById('root'));
     }
 
@@ -101,12 +93,11 @@ class Home extends Component {
         return (
             <div className="home">
                 <Header />
-                HURRAY
+                {/* Map over the List and then display all details of all restaurants. */}
                 {this.state.restaurantList.map((pic,index) => ( console.log(pic.restaurantName)  ))}
 
-
                  <div className="main-body-container">
-                    <GridList cellHeight={"auto"} className={classes.gridListMain} cols={3}>
+                    <GridList cellHeight={"auto"} className={classes.gridListMain} cols={4}>
                         {/**Check implementation of onClick for GridListTile. If we directly write method name then it executes immediately*/}
                         {this.state.restaurantList.map(restaurant => (
                             <GridListTile onClick={() => this.showRestaurantDetails(restaurant.id)}>
@@ -119,8 +110,8 @@ class Home extends Component {
                                             </Typography>
                                             <p>{restaurant.categories}</p>
                                             <div>
-                                                <span className="rating">{restaurant.userRating} ({restaurant.numberUsersRated})</span>
-                                                <span>{restaurant.avgPrice * 2} for two</span>
+                                                <span className="rating"> <FontAwesomeIcon icon="star" />{restaurant.userRating} ({restaurant.numberUsersRated})</span>
+                                                <span className="price">  <FontAwesomeIcon icon="rupee-sign"  /> {restaurant.avgPrice * 2} for two</span>
                                             </div>
                                         </Typography>
                                     </CardContent>
