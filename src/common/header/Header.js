@@ -1,4 +1,4 @@
-    
+
 import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -17,7 +17,6 @@ import Input from '@material-ui/core/Input';
 import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import ProfileIcon from '@material-ui/icons/AccountCircle';
-import Home from '../../screens/home/Home';
 import Snackbar from '@material-ui/core/Snackbar';
 import ReactDOM from 'react-dom';
 import AccountCircle from '@material-ui/icons/AccountCircle';
@@ -222,7 +221,7 @@ class Header extends Component {
                             snackbarOpen: true,
                         });
                         that.closeModalHandler();
-                        ReactDOM.render(<Home />, document.getElementById('root'));
+
                     }
                     else if (this.status === 401) {
                         that.setState({
@@ -426,7 +425,9 @@ class Header extends Component {
         });
 
         // Redirecting to Login page
-        ReactDOM.render(<Home />, document.getElementById('root'));
+        this.props.history.push({
+                pathname: '/home'
+            })
     }
 
     openModalHandler = () => {
@@ -463,9 +464,7 @@ class Header extends Component {
     render() {
         const { classes } = this.props;
         const { open } = this.state;
-        /*if (this.props.showSearch === "false") {
-            this.setState({ showSearch: this.props.showSearch });
-        }*/
+
         return (
             <div>
                 <header >
