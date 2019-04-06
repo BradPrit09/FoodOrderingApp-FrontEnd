@@ -31,7 +31,7 @@ const styles = theme => ({
     borderRadius: '4px',
     backgroundColor: '#263238',
     width: '300px',
-    left: '36%',
+    left: '35%',
   },
   searchIcon: {
     width: theme.spacing.unit * 6,
