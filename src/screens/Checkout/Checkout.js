@@ -25,6 +25,7 @@ import FormControlLabel from '@material-ui/core/FormControlLabel';
 import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CheckCircle from '@material-ui/icons/CheckCircle';
+import CloseIcon from '@material-ui/icons/Close';
 
 const styles = theme => ({
     root: {
@@ -104,6 +105,20 @@ class Checkout extends Component {
             address : "" ,
             categories : [],
             totalCartItemsValue: "700",
+            orderNotificationMessage:"",
+            selectedAddress:[
+            {
+                "id": 1,
+                "flatBuilNo": "501/31 Mahalaxmi SRA CHS",
+                "locality": "Prabhadevi",
+                "city": "Mumbai",
+                "zipcode": "400015",
+                "state": {
+                    "id": 21,
+                    "stateName": "Maharashtra"
+                }
+            }
+            ],
             cartItems: [
                     {
                         "id": 1,
@@ -319,6 +334,24 @@ class Checkout extends Component {
         });
     }
 
+    confirmOrderHandler = () => {
+        let xhr = new XMLHttpRequest();
+        let that = this;
+        var address = this.state.selectedAddress;
+        var parameters="adrressId="+address.id+"&flatBuilNo="+address.flatBuilNo+"&locality="+address.locality+"&city="+address.city+"&zipcode="+address.zipcode;
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                that.setState({
+                    orderNotificationMessage : "Your order has been placed successfully!"            
+                });        
+             }
+        });
+
+        xhr.open("GET", "http://localhost:8085/api/order");
+        xhr.send(parameters);
+
+    }
+
     render() {
         const { classes } = this.props;
         const steps = getSteps();
@@ -492,7 +525,7 @@ class Checkout extends Component {
                                     <span className="div-container">{this.state.totalCartItemsValue}</span>
                                     </div>
                                     <br />
-                                    <Button variant="contained" color="primary">
+                                    <Button className="div-container" variant="contained" onClick={this.confirmOrderHandler} color="primary">
                                         Place Order
                                     </Button>
                                     <Snackbar
@@ -505,7 +538,17 @@ class Checkout extends Component {
                                         ContentProps={{
                                             'aria-describedby': 'message-id',
                                         }}
-                                        message={<span id="message-id">{this.state.cartNotificationMessage}</span>}
+                                        message={<span id="message-id">{this.state.orderNotificationMessage}</span>}
+                                        action={[
+                                            <IconButton
+                                            key="close"
+                                            aria-label="Close"
+                                            color="inherit"
+                                            className={classes.close}
+                                            >
+                                            <CloseIcon />
+                                            </IconButton>,
+                                        ]}
                                     />
                                 </CardContent>
                             </Card>
