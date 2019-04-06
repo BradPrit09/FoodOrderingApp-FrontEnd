@@ -116,7 +116,7 @@ class Home extends Component {
         const { classes } = this.props;
         return (
             <div className="home">
-                <Header searchClickHandler={this.searchClickHandler}/>
+                <Header searchClickHandler={this.searchClickHandler}showSearch="true"/>
                 {/* Map over the List and then display all details of all restaurants. */}
                 {this.state.restaurantList.map((pic,index) => ( console.log(pic.restaurantName)  ))}
 

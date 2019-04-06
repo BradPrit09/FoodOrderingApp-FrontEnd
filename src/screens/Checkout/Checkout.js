@@ -1,7 +1,7 @@
 import React, { Component } from './node_modules/react';
 import './Checkout.css';
 import Header from '../../common/header/Header';
-import { GridListTile, Typography } from './node_modules/@material-ui/core';
+import { GridListTile, Typography } from '../../../node_modules/@material-ui/core';
 import Card from './node_modules/@material-ui/core/Card';
 import CardContent from './node_modules/@material-ui/core/CardContent';
 import GridList from './node_modules/@material-ui/core/GridList';
