@@ -31,10 +31,10 @@ const styles = theme => ({
     borderRadius: '4px',
     backgroundColor: '#263238',
     width: '300px',
-    left: '36%',
+    left: '35%',
   },
   searchIcon: {
-    width: theme.spacing.unit * 6,
+    width: theme.spacing.unit * 5,
     height: '100%',
     position: 'absolute',
     pointerEvents: 'none',
@@ -42,6 +42,7 @@ const styles = theme => ({
     alignItems: 'center',
     justifyContent: 'center',
     color: '#fff',
+    
   },
   inputRoot: {
     width: '100%',
@@ -244,7 +245,7 @@ closeModalHandler = () =>{
                                 <InputLabel htmlFor="username">Username</InputLabel>
                                 <Input id="username" type="text" username={this.state.username} onChange={this.inputUsernameChangeHandler} />
                                 <FormHelperText className={this.state.usernameRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -252,7 +253,7 @@ closeModalHandler = () =>{
                                 <InputLabel htmlFor="password">Password</InputLabel>
                                 <Input id="loginPassword" type="password" loginpassword={this.state.loginPassword} onChange={this.inputLoginPasswordChangeHandler} />
                                 <FormHelperText className={this.state.loginPasswordRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -265,7 +266,7 @@ closeModalHandler = () =>{
                                 <InputLabel htmlFor="firstname">First Name</InputLabel>
                                 <Input id="firstname" type="text" firstname={this.state.firstname} onChange={this.inputFirstNameChangeHandler} />
                                 <FormHelperText className={this.state.firstnameRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -273,7 +274,7 @@ closeModalHandler = () =>{
                                 <InputLabel htmlFor="lastname">Last Name</InputLabel>
                                 <Input id="lastname" type="text" lastname={this.state.lastname} onChange={this.inputLastNameChangeHandler} />
                                 <FormHelperText className={this.state.lastnameRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -281,7 +282,7 @@ closeModalHandler = () =>{
                                 <InputLabel htmlFor="email">Email</InputLabel>
                                 <Input id="email" type="text" email={this.state.email} onChange={this.inputEmailChangeHandler} />
                                 <FormHelperText className={this.state.emailRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -289,7 +290,7 @@ closeModalHandler = () =>{
                                 <InputLabel htmlFor="registerPassword">Password</InputLabel>
                                 <Input id="registerPassword" type="password" registerpassword={this.state.registerPassword} onChange={this.inputRegisterPasswordChangeHandler} />
                                 <FormHelperText className={this.state.registerPasswordRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -297,7 +298,7 @@ closeModalHandler = () =>{
                                 <InputLabel htmlFor="contact">Contact No.</InputLabel>
                                 <Input id="contact" type="text" contact={this.state.contact} onChange={this.inputContactChangeHandler} />
                                 <FormHelperText className={this.state.contactRequired}>
-                                    <span className="red">required</span>
+                                    <span className="red">Required!</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
