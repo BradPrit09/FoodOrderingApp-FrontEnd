@@ -414,9 +414,10 @@ class Checkout extends Component {
                                         <Typography style={{ fontSize:'20px',marginRight:'20px',marginBottom:'10px'}}>{address.city}</Typography>
                                         <Typography style={{ fontSize:'20px',marginRight:'20px',marginBottom:'10px'}}>{address.state.stateName}</Typography>
                                         <Typography style={{ fontSize:'20px',marginRight:'20px',marginBottom:'10px'}}>{address.zipcode}</Typography>
-                                        <IconButton className={this.state.iconClass} style={{marginLeft:'60%'}} 
+                                        <IconButton id={i} key={i} 
+                                        style={{marginLeft:'60%'}} 
                                         onClick={() => this.iconClickHandler(address,i)}>
-                                            <CheckCircle/>
+                                            <CheckCircle className={this.state.selectedIndex === i ? 'green' : 'grid'} />
                                         </IconButton>
                                     </div>
                                     </GridListTile>
