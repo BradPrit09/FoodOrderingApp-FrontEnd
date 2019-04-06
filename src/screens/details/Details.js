@@ -47,123 +47,6 @@ class Details extends Component {
             restaurantDetails: '',
             address: '',
             categories: []
-            /* restaurantDetails: {
-                  "id": 1,
-                  "restaurantName": "Dominoz",
-                  "photoUrl": "https://b.zmtcdn.com/data/pictures/4/18528394/6c3590212b3700b1b160422fd8478287.jpg?output-format=webp",
-                  "userRating": 4.2,
-                  "avgPrice": 250,
-                  "numberUsersRated": 99,
-                  "address": {
-                      "id": 1,
-                      "flatBuilNo": "501/31 Mahalaxmi SRA CHS",
-                      "locality": "Prabhadevi",
-                      "city": "Mumbai",
-                      "zipcode": "400015",
-                      "state": {
-                          "id": 21,
-                          "stateName": "Maharashtra"
-                      }
-                  },
-                  "categories": [
-                      {
-                          "id": 6,
-                          "categoryName": "Chinese",
-                          "items": [
-                              {
-                                  "id": 27,
-                                  "itemName": "fried rice",
-                                  "price": 206,
-                                  "type": "Veg"
-                              },
-                              {
-                                  "id": 25,
-                                  "itemName": "chillie chowmine",
-                                  "price": 210,
-                                  "type": "Non-Veg"
-                              }
-                          ]
-                      },
-                      {
-                          "id": 4,
-                          "categoryName": "Drinks",
-                          "items": [
-                              {
-                                  "id": 8,
-                                  "itemName": "hot chocolate",
-                                  "price": 250,
-                                  "type": "Veg"
-                              },
-                              {
-                                  "id": 6,
-                                  "itemName": "tea",
-                                  "price": 20,
-                                  "type": "Veg"
-                              },
-                              {
-                                  "id": 11,
-                                  "itemName": "coke",
-                                  "price": 100,
-                                  "type": "Veg"
-                              }
-                          ]
-                      },
-                      {
-                          "id": 2,
-                          "categoryName": "Indian",
-                          "items": [
-                              {
-                                  "id": 23,
-                                  "itemName": "butter paneer",
-                                  "price": 190,
-                                  "type": "Veg"
-                              },
-                              {
-                                  "id": 4,
-                                  "itemName": "chapati",
-                                  "price": 20,
-                                  "type": "Veg"
-                              },
-                              {
-                                  "id": 13,
-                                  "itemName": "pastry",
-                                  "price": 210,
-                                  "type": "Veg"
-                              },
-                              {
-                                  "id": 29,
-                                  "itemName": "veg biryani",
-                                  "price": 203,
-                                  "type": "Veg"
-                              },
-                              {
-                                  "id": 17,
-                                  "itemName": "naan",
-                                  "price": 30,
-                                  "type": "Veg"
-                              },
-                              {
-                                  "id": 30,
-                                  "itemName": "chicken biryani",
-                                  "price": 245,
-                                  "type": "Non-Veg"
-                              },
-                              {
-                                  "id": 21,
-                                  "itemName": "matar paneer",
-                                  "price": 270,
-                                  "type": "Veg"
-                              },
-                              {
-                                  "id": 15,
-                                  "itemName": "macroni",
-                                  "price": 130,
-                                  "type": "Veg"
-                              }
-                          ]
-                      }
-                  ]
-             } */
         }
     }
 
@@ -175,7 +58,6 @@ class Details extends Component {
             if (this.readyState === 4) {
             
                 that.setState({
-
                     restaurantDetails: JSON.parse(this.responseText),
                     address: JSON.parse(this.responseText).address,
                     categories: JSON.parse(this.responseText).categories,
@@ -345,21 +227,22 @@ class Details extends Component {
                         <div className="my-cart">
                             <Card>
                                 <CardContent>
+                                    <div>
                                     <Typography gutterBottom variant="h5" component="h2">
                                         <Badge badgeContent={this.state.cartItems.length} color="primary" classes={{ badge: classes.margin }}>
                                             <ShoppingCart />
                                         </Badge>
-                                        <span className="cart-display"> MY CART</span>
+                                         <span style={{marginLeft:'20px'}}>My Cart</span>
                                     </Typography>
+                                    </div>
                                     {this.state.cartItems.map(item => (
-                                        <div key={"item" + item.id}>
-                                            <span>{item.type === 'Veg' &&
+                                        <div className="order-body-container" key={"item" + item.id}>
+                                            <div className="div-container div-items">{item.type === 'Veg' &&
                                                 <FontAwesomeIcon icon="circle" className="veg-item-color" />}
                                                 {item.type === 'Non-Veg' &&
-                                                    <FontAwesomeIcon icon="circle" className="non-veg-item-color" />}
-                                            </span>
-                                            <span>{item.itemName}</span>
-                                            <span>
+                                                    <FontAwesomeIcon icon="circle" className="non-veg-item-color" />}    {item.itemName}
+                                            </div>
+                                            <div>
                                                 <IconButton
                                                     key="close"
                                                     aria-label="Close"
@@ -367,9 +250,9 @@ class Details extends Component {
                                                     onClick={() => this.removeCartItemClickHandler(item)}>
                                                     <Remove />
                                                 </IconButton>
-                                            </span>
-                                            <span>{item.quantity}</span>
-                                            <span>
+                                            </div>
+                                            <div className="div-container"> {item.quantity}</div>
+                                            <div>
                                                 <IconButton
                                                     key="close"
                                                     aria-label="Close"
@@ -377,18 +260,17 @@ class Details extends Component {
                                                     onClick={() => this.addCartItemClickHandler(item)}>
                                                     <Add />
                                                 </IconButton>
-                                            </span>
-                                            <FontAwesomeIcon icon="rupee-sign" />
-                                            <span> {item.totalPrice * item.quantity}</span>
-
+                                            </div>
+                                            <div className="div-container"><FontAwesomeIcon icon="rupee-sign" /> {item.totalPrice * item.quantity}</div>
                                         </div>
 
                                     ))}
-                                    <br />
-                                    TOTAL AMOUNT   <FontAwesomeIcon icon="rupee-sign" />   {this.state.totalCartItemsValue}
-                                    <br />
-                                    <br />
-                                    <Button variant="contained" color="primary"
+                                    <div className="body-container">
+                                    <span style={{fontWeight:'bold'}} className="div-container div-items">TOTAL AMOUNT </span>   
+                                    <span className="rupee-container"><FontAwesomeIcon icon="rupee-sign" /> {this.state.totalCartItemsValue}</span>
+                                    </div>
+                                    <br/>
+                                    <Button  className="button-container" style={{marginLeft:'55px'}} variant="contained" color="primary"
                                         onClick={this.onClickCheckoutButton({ vertical: 'bottom', horizontal: 'left' })}
                                     >
                                         CHECKOUT
