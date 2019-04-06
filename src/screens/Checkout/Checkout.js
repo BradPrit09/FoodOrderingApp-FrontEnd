@@ -146,7 +146,7 @@ class Checkout extends Component {
              }
         });
 
-        xhr.open("GET", "http://localhost:8085/api/address/user");
+        xhr.open("GET", "http://localhost:8080/api/address/user");
         xhr.setRequestHeader("accessToken", sessionStorage.getItem("access-token"));
         xhr.send(data);
 
@@ -158,7 +158,7 @@ class Checkout extends Component {
              }
         });
 
-        xhr1.open("GET", "http://localhost:8085/api/payment");
+        xhr1.open("GET", "http://localhost:8080/api/payment");
         xhr1.setRequestHeader("accessToken", sessionStorage.getItem("access-token"));
         xhr1.send(data);
 
@@ -170,7 +170,7 @@ class Checkout extends Component {
              }
         });
 
-        xhr2.open("GET", "http://localhost:8085/api/states");
+        xhr2.open("GET", "http://localhost:8080/api/states");
         xhr2.send(data);
         }
 
@@ -316,7 +316,7 @@ class Checkout extends Component {
              }
         });
 
-        xhr.open("GET", "http://localhost:8085/api/order");
+        xhr.open("GET", "http://localhost:8080/api/order");
         xhr.send(parameters);
 
     }
