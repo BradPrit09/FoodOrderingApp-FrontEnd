@@ -114,23 +114,16 @@
     margin-left: 80px;
 }
 
-.button-container {
+.cart-button {
     margin-left: 70px;
     width: 500px;
-}
-
-.cart-button {
-    float: right;
-    width: 500px;
-    margin-left: 80px;
-    margin-top: 30px;
 }
 
 .cart-display{
     margin-left: 20px;
 }
 
-.rupee-container {
+.rupee-cart-container {
     margin: 8px;
     margin-left: 38%;
 }

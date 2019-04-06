@@ -1,4 +1,3 @@
-
 import React, { Component } from 'react';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -399,12 +398,25 @@ class Header extends Component {
 
     logoutHandler = event => {
         // Removing accesstoken in session storage on clicking logout 
+        var acToken = sessionStorage.getItem("access-token");
         sessionStorage.removeItem("access-token");
 
         this.setState({
             loggedIn: false,
-            open: false
+            open: false,
         });
+
+        let xhr = new XMLHttpRequest();
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                
+            }
+        });
+        xhr.open("PUT","http://localhost:8080/api/user/logout?accessToken="+acToken);
+        xhr.setRequestHeader("Content-Type", "application/jason;CharSet=UTF-8");
+        xhr.setRequestHeader("accessToken",acToken);
+        xhr.send();
+
     }
 
     openModalHandler = () => {
