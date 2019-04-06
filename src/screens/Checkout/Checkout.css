@@ -40,6 +40,7 @@
 .main-body-container {
     display: flex;
     justify-content: space-between;
+    height: 100%;
 }
 
 .body-container {

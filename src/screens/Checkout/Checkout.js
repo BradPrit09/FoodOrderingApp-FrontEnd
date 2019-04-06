@@ -486,7 +486,7 @@ class Checkout extends Component {
         </div>
 
             <div className="orderSummary">
-                            <Card style={{height:'70%'}}>
+                            <Card style={{height:'100%'}}>
                                 <CardContent>
                                     <Typography style={{marginLeft:'40px',fontWeight:'bold',marginBottom:'30px'}} gutterBottom variant="h5" component="h2">
                                         Summary
