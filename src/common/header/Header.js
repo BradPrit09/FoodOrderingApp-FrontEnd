@@ -184,7 +184,6 @@ class Header extends Component {
         if (this.state.contactNoRequired === "dispNone" && this.state.loginPasswordRequired === "dispNone") {
             let xhr = new XMLHttpRequest();
             let that = this;
-            var accessToken = "";
 
             xhr.addEventListener("readystatechange", function () {
                 if (this.readyState === 4 && this.status === 200) {
@@ -229,8 +228,6 @@ class Header extends Component {
 
         if (this.state.contactRequired === "dispNone" && this.state.registerPasswordRequired === "dispNone"
             && this.state.emailRequired === "dispNone" && this.state.firstnameRequired === "dispNone") {
-
-            let number_pattern = "[0-9]";
 
             // if (this.state.contact.match(number_pattern) && this.state.contact.length === 10) {
 
@@ -291,7 +288,7 @@ class Header extends Component {
     }
 
     tabChangeHandler = (event, value) => {
-        this.state = {
+        this.setState({
             contactNoRequired: "dispNone",
             contactNo: "",
             loginPasswordRequired: "dispNone",
@@ -306,7 +303,7 @@ class Header extends Component {
             registerPassword: "",
             contactRequired: "dispNone",
             contact: "",
-        };
+        });
         this.setState({ value });
     }
 
