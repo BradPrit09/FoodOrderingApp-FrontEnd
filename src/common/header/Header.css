@@ -18,7 +18,7 @@
 }
 
 .tabs {
-    margin-bottom: 20px;
+    margin-bottom: 10px;
 }
 
 .dispNone {
@@ -33,4 +33,7 @@
 
 .login-button {
     margin-left: 75%;
+}
+.login-button2 {
+    margin-left: 89%;
 }

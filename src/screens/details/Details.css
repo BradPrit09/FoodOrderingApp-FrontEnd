@@ -110,16 +110,20 @@
 
 .my-cart{
     float: right;
-    width: 500px;
+    width: 700px;
     margin-left: 80px;
 }
 
 .cart-button {
-    flex-direction: column;
-    width: auto;
-    margin-left: 500px;
+    margin-left: 70px;
+    width: 500px;
 }
 
 .cart-display{
     margin-left: 20px;
+}
+
+.rupee-cart-container {
+    margin: 8px;
+    margin-left: 38%;
 }

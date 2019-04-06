@@ -116,10 +116,7 @@ class Home extends Component {
         const { classes } = this.props;
         return (
             <div className="home">
-                <Header searchClickHandler={this.searchClickHandler}/>
-                {/* Map over the List and then display all details of all restaurants. */}
-                {this.state.restaurantList.map((pic,index) => ( console.log(pic.restaurantName)  ))}
-
+                <Header searchClickHandler={this.searchClickHandler}  showSearch="true"/>
                  <div className="main-body-container">
                     <GridList cellHeight={"auto"} className={classes.gridListMain} cols={4}>
                         {/**Check implementation of onClick for GridListTile. If we directly write method name then it executes immediately*/}
