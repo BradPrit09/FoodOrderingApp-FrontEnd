@@ -1,41 +1,79 @@
 .details-header-bg{
-    height: 300px;
-    background-color: grey;
+    height: 10%;
+    background-color: #d9d9d9;
     display: flex;
     flex-direction: row;
-    align-items: center;
+    /*align-items: center;*/
 }
 
- .restaurant-image{
-    height: 250px;
-    width: 250px;
+.details-restImage {
+    display: flex;
+    flex-direction: row;
+    padding: 2%;
 }
 
- .menu-cart-items{
+.details-restDetails {
+    display: flex;
+    flex-direction: column;
+    padding: 2%;
+    width: 70%;
+}
+
+.details-usersRated {
+    font-size: 14px;
+    text-decoration: darkgray;
+    font-weight: bold
+}
+
+.details-userstext{
+    padding-right: 7%;
+}
+.details-rating {
+    font-weight: 500;
+    font-size: 20px;
+}
+.details-price {
+    padding-left: 4px;
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.details-pricesymbol {
+    padding-left: 70%;
+}
+.details-rightText {
+    padding-left: 60%;
+}
+.restaurant-image{
+    height: 200px;
+    width: 200px;
+}
+
+.menu-cart-items{
     padding: 50px;
     display: flex;
     flex-direction: row;
     align-items: top;
 }
 
- .menu-items{
+.menu-items{
     width: 1000px;
 }
 
- .category-name{
+.category-name{
     text-transform: uppercase;
 }
 
- .veg-item-color{
+.veg-item-color{
  color: green;
 }
 
- .non-veg-item-color{
+.non-veg-item-color{
     color: red;
 }
 
 
- .my-cart{
+.my-cart{
     margin: 30px 60px auto auto;
     width: 400px;
 }

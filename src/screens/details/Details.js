@@ -12,7 +12,13 @@ import Remove from '@material-ui/icons/Remove';
 import ShoppingCart from '@material-ui/icons/ShoppingCart';
 import React, { Component } from 'react';
 import Header from '../../common/header/Header';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar } from '@fortawesome/free-solid-svg-icons';
+import { faRupeeSign } from '@fortawesome/free-solid-svg-icons';
+import { library } from '@fortawesome/fontawesome-svg-core';
 import './Details.css';
+library.add(faStar);
+library.add(faRupeeSign);
 
 const styles = theme => ({
     snackbar: {
@@ -153,24 +159,24 @@ class Details extends Component {
                     }
                 ]
             }
-           }
+        }
     }
 
     componentWillMount() {
-         {/**API to fetch restaurant Details*/ }
-         let xhr = new XMLHttpRequest();
-         let that = this;
-         xhr.addEventListener("readystatechange", function () {
-             if (this.readyState === 4) {
-                 that.setState({
-                     restaurantDetails: JSON.parse(this.responseText)
-                 });
-             }
-         });
-         {/**Extracted Dynamically passed restaurantId from params */ }
-         xhr.open("GET", "http://localhost:8080/api/restaurant/" + this.props.id);
-         xhr.send();
-     }
+        {/**API to fetch restaurant Details*/ }
+        let xhr = new XMLHttpRequest();
+        let that = this;
+        xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {
+                that.setState({
+                    restaurantDetails: JSON.parse(this.responseText)
+                });
+            }
+        });
+        {/**Extracted Dynamically passed restaurantId from params */ }
+        xhr.open("GET", "http://localhost:8080/api/restaurant/" + this.props.id);
+        xhr.send();
+    }
 
     addMenuItemClickHandler = (item) => {
         //set new attribute quantity for the cart
@@ -230,7 +236,7 @@ class Details extends Component {
 
     onClickCheckoutButton = state => () => {
         // this.setState({ open: true, ...state });
-       
+
 
     };
 
@@ -241,36 +247,50 @@ class Details extends Component {
     render() {
         const { classes } = this.props;
         let restaurantDetails = this.state.restaurantDetails;
-        console.log( restaurantDetails ) ;
-        
+        console.log(restaurantDetails);
+
         return (
             <div>
                 <Header />
                 <div>
                     <div className="details-header-bg">
-                        <span>
-                            <img className="restaurant-image" src={restaurantDetails.photoUrl} alt="RestaurantImage" />
-                        </span>
-                        <span>
-                            {/**For adjacent state fields need to wrap them in some parent component */}
-                            <Typography gutterBottom variant="h5" component="h2">
-                                {restaurantDetails.restaurantName}
-                            </Typography>
-                            <br />                        
-                          {/*  <Typography>{restaurantDetails.address.locality}</Typography>  */}
-                            <br />
-                            <Typography>
-                                {restaurantDetails.categories.map(category => (
-                                    <span key={"category" + category.id}>{category.categoryName}, </span>
-                                ))}
-                            </Typography>
-                            <br />
-                            <Typography>{restaurantDetails.userRating}</Typography>
-                            <Typography>AVERAGE RATING BY <br />{restaurantDetails.numberUsersRated} USERS</Typography>
-                        </span>
-                        <span>
-                            {restaurantDetails.avgPrice * 2} <br /> AVERAGE COST FOR <br />TWO PEOPLE
-                        </span>
+                        <div className="details-restImage">
+                            <span>
+                                <img className="restaurant-image" src={restaurantDetails.photoUrl} alt="RestaurantImage" />
+                            </span>
+                        </div>
+                        <div className="details-restDetails">
+                            <span>
+                                {/**For adjacent state fields need to wrap them in some parent component */}
+                                <Typography gutterBottom variant="h4" component="h2">
+                                    {restaurantDetails.restaurantName}
+                                </Typography>
+                                <br />
+                                {/*  <Typography>{restaurantDetails.address.locality}</Typography>  */}
+                                <br />
+                                <Typography variant="h6" gutterBottom>
+                                    {restaurantDetails.categories.map(category => (
+                                        <span key={"category" + category.id}>{category.categoryName}, </span>
+                                    ))}
+                                </Typography>
+                                <FontAwesomeIcon icon="star" />
+                                <span className="details-rating">{restaurantDetails.userRating}</span>
+                                <span className="details-pricesymbol">
+                                    <FontAwesomeIcon icon="rupee-sign" />
+                                </span>
+                                <span className="details-price">
+                                    {restaurantDetails.avgPrice * 2}</span>
+                                <Typography variant="caption">
+                                    <span>AVERAGE RATING BY </span>
+                                    <span className="details-rightText">AVERAGE COST FOR</span>
+                                </Typography>
+                                <Typography variant="caption">
+                                    <span className="details-usersRated">{restaurantDetails.numberUsersRated} </span>
+                                    <span className="details-userstext">USERS</span>
+                                    <span className="details-rightText">TWO PEOPLE</span>
+                                </Typography>
+                            </span>
+                        </div>
                     </div>
                     <div className="menu-cart-items">
                         <div className="menu-items">
