@@ -17,6 +17,7 @@ import PropTypes from 'prop-types';
 import FormHelperText from '@material-ui/core/FormHelperText';
 import ProfileIcon from '@material-ui/icons/AccountCircle';
 import Home from '../../screens/home/Home';
+import Snackbar from '@material-ui/core/Snackbar';
 import ReactDOM from 'react-dom';
 import './Header.css';
 
@@ -139,8 +140,11 @@ class Header extends Component {
             contact: "",
             query: "",
             loggedIn: false,
+            registrationSuccess: false,
+            message: "",
             accessToken: {},
             open: false,
+            snackbarOpen: false,
         };
     }
 
@@ -163,13 +167,15 @@ class Header extends Component {
             var accessToken = "";
 
             xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === 4) {
+                if (this.readyState === 4 && this.status === 200 ) {
 
                     sessionStorage.setItem('access-token', xhr.getResponseHeader("access-token"));
                     console.log(JSON.parse(xhr.responseText));
                     console.log(xhr.getResponseHeader("access-token"));
                     that.setState({
-                        loggedIn: true
+                        loggedIn: true,
+                        snackbarOpen: true,
+                        message:"Logged in successfully!",
                     });
                     that.closeModalHandler();
                     ReactDOM.render(<Home />, document.getElementById('root'));
@@ -177,7 +183,7 @@ class Header extends Component {
             });
 
 
-            xhr.open("POST", "http://localhost:8080//api/user/login?contactNumber=" + this.state.contactNo + "&password=" + this.state.loginPassword);
+            xhr.open("POST", "http://localhost:8080/api/user/login?contactNumber=" + this.state.contactNo + "&password=" + this.state.loginPassword);
             xhr.setRequestHeader("Content-Type", "application/jason;CharSet=UTF-8");
             xhr.send();
         }
@@ -188,11 +194,38 @@ class Header extends Component {
     }
 
     registerClickHandler = () => {
+
         this.state.firstname === "" ? this.setState({ firstnameRequired: "dispBlock" }) : this.setState({ firstnameRequired: "dispNone" });
         this.state.lastname === "" ? this.setState({ lastnameRequired: "dispBlock" }) : this.setState({ lastnameRequired: "dispNone" });
         this.state.email === "" ? this.setState({ emailRequired: "dispBlock" }) : this.setState({ emailRequired: "dispNone" });
         this.state.registerPassword === "" ? this.setState({ registerPasswordRequired: "dispBlock" }) : this.setState({ registerPasswordRequired: "dispNone" });
         this.state.contact === "" ? this.setState({ contactRequired: "dispBlock" }) : this.setState({ contactRequired: "dispNone" });
+
+        if (this.state.contactRequired === "dispNone" && this.state.registerPasswordRequired === "dispNone"
+            && this.state.emailRequired === "dispNone" && this.state.firstnameRequired === "dispNone"
+            && this.state.lastnameRequired === "dispNone") {
+
+        
+            let xhrSignup = new XMLHttpRequest();
+            let that = this;
+            xhrSignup.addEventListener("readystatechange", function () {
+                if (this.readyState === 4 && this.status === 200 ) {
+                    that.setState({
+                        registrationSuccess: true,
+                        snackbarOpen: true,
+                        message:"Registered successfully! Please login now!",
+                    });
+                    that.openModalHandler();
+                    ReactDOM.render(<Home />, document.getElementById('root'));
+                }
+            });
+
+            xhrSignup.open("POST", "http://localhost:8080/api/user/signup?firstName="
+            +this.state.firstname+"&lastName="+this.state.lastname+"&email="+this.state.email
+            +"&contactNumber="+this.state.contact+"&password="+this.state.registerPassword);
+            xhrSignup.setRequestHeader("Content-Type", "application/jason;CharSet=UTF-8");
+            xhrSignup.send();
+        }
     }
 
     inputLoginPasswordChangeHandler = (e) => {
@@ -253,14 +286,11 @@ class Header extends Component {
     };
 
     /**
-     * Handler for Closing Menu
+     * Handler for Closing Snackbar
      */
-    handleClose = event => {
-        if (this.anchorEl.contains(event.target)) {
-            return;
-        }
+    snackbarHandleClose = event => {
 
-        this.setState({ open: false });
+        this.setState({ snackbarOpen: false });
 
     };
 
@@ -349,7 +379,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="contactNo">Contact No.</InputLabel>
                                 <Input id="contactNo" type="text" contact={this.state.contactNo} onChange={this.inputcontactNoChangeHandler} />
                                 <FormHelperText className={this.state.contactNoRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -357,7 +387,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="password">Password</InputLabel>
                                 <Input id="loginPassword" type="password" loginpassword={this.state.loginPassword} onChange={this.inputLoginPasswordChangeHandler} />
                                 <FormHelperText className={this.state.loginPasswordRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -370,7 +400,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="firstname">First Name</InputLabel>
                                 <Input id="firstname" type="text" firstname={this.state.firstname} onChange={this.inputFirstNameChangeHandler} />
                                 <FormHelperText className={this.state.firstnameRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -378,7 +408,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="lastname">Last Name</InputLabel>
                                 <Input id="lastname" type="text" lastname={this.state.lastname} onChange={this.inputLastNameChangeHandler} />
                                 <FormHelperText className={this.state.lastnameRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -386,7 +416,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="email">Email</InputLabel>
                                 <Input id="email" type="text" email={this.state.email} onChange={this.inputEmailChangeHandler} />
                                 <FormHelperText className={this.state.emailRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -394,7 +424,7 @@ class Header extends Component {
                                 <InputLabel htmlFor="registerPassword">Password</InputLabel>
                                 <Input id="registerPassword" type="password" registerpassword={this.state.registerPassword} onChange={this.inputRegisterPasswordChangeHandler} />
                                 <FormHelperText className={this.state.registerPasswordRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
@@ -402,14 +432,25 @@ class Header extends Component {
                                 <InputLabel htmlFor="contact">Contact No.</InputLabel>
                                 <Input id="contact" type="text" contact={this.state.contact} onChange={this.inputContactChangeHandler} />
                                 <FormHelperText className={this.state.contactRequired}>
-                                    <span className="red">Required!</span>
+                                    <span className="red">required</span>
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
                             <Button variant="contained" color="primary" onClick={this.registerClickHandler}>SIGNUP</Button>
                         </TabContainer>
                     }
-
+                    <Snackbar
+                        anchorOrigin={{
+                            vertical: 'bottom',
+                            horizontal: 'left',
+                        }}
+                        open={this.state.snackbarOpen}
+                        onClose={this.snackbarHandleClose}
+                        ContentProps={{
+                            'aria-describedby': 'message-id',
+                        }}
+                        message={<span id="message-id">{this.state.message}</span>}
+                    />
                 </Modal>
             </div>
         )
