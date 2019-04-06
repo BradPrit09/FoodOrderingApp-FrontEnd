@@ -16,7 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
-import Checkout from '../Checkout/Checkout';
+import Checkout from '../../screens/checkout/Checkout';
 import ReactDOM from 'react-dom';
 import { faCircle } from '@fortawesome/free-solid-svg-icons';
 
@@ -313,24 +313,24 @@ class Details extends Component {
                                         <Divider />
                                     <br/>
                                     {category.items.map(item => (
-                                        <div key={"item" + item.id}>
-                                            <span>{item.type === 'Veg' &&
-                                                <i className="fa fa-stop-circle-o veg-item-color" aria-hidden="true"></i>}
+                                        <div className="itemContainer" key={"item" + item.id}>
+                                            <div className="div-container div-items">{item.type === 'Veg' &&
+                                                <FontAwesomeIcon icon="circle" className="veg-item-color"/>}
                                                 {item.type === 'Non-Veg' &&
-                                                    <i className="fa fa-stop-circle-o non-veg-item-color" aria-hidden="true"></i>}
-                                            </span>
-                                            <span>{item.itemName}</span>
+                                                    <FontAwesomeIcon icon="circle" className="non-veg-item-color"/>} {item.itemName}
+                                            </div>
+                                            {/*<div className="div-container"> {item.itemName}</div>*/}
 
-                                            <span className = "cart-price"> <FontAwesomeIcon icon="rupee-sign" />
-                                            {item.price}</span>
-                                            <span className = "cart-button">
+                                            <div className="div-container price-container"> <FontAwesomeIcon icon="rupee-sign" />
+                                            {item.price}</div>
+                                            <div className="plus-container">
                                                 <IconButton
                                                     key="close"
                                                     aria-label="Close"
                                                     color="inherit"
                                                     onClick={() => this.addMenuItemClickHandler(item)}>
                                                     <Add />
-                                                </IconButton></span>
+                                                </IconButton></div>
                                         </div>
                                     ))}
                                 </div>
