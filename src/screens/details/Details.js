@@ -313,24 +313,24 @@ class Details extends Component {
                                         <Divider />
                                     <br/>
                                     {category.items.map(item => (
-                                        <div key={"item" + item.id}>
-                                            <span>{item.type === 'Veg' &&
-                                                <i className="fa fa-stop-circle-o veg-item-color" aria-hidden="true"></i>}
+                                        <div className="itemContainer" key={"item" + item.id}>
+                                            <div className="div-container">{item.type === 'Veg' &&
+                                                <FontAwesomeIcon icon="circle" className="veg-item-color"/>}
                                                 {item.type === 'Non-Veg' &&
-                                                    <i className="fa fa-stop-circle-o non-veg-item-color" aria-hidden="true"></i>}
-                                            </span>
-                                            <span>{item.itemName}</span>
+                                                    <FontAwesomeIcon icon="circle" className="non-veg-item-color"/>}
+                                            </div>
+                                            <div className="div-container"> {item.itemName}</div>
 
-                                            <span className = "cart-price"> <FontAwesomeIcon icon="rupee-sign" />
-                                            {item.price}</span>
-                                            <span className = "cart-button">
+                                            <div className="div-container"> <FontAwesomeIcon icon="rupee-sign" />
+                                            {item.price}</div>
+                                            <div className="div-container">
                                                 <IconButton
                                                     key="close"
                                                     aria-label="Close"
                                                     color="inherit"
                                                     onClick={() => this.addMenuItemClickHandler(item)}>
                                                     <Add />
-                                                </IconButton></span>
+                                                </IconButton></div>
                                         </div>
                                     ))}
                                 </div>
