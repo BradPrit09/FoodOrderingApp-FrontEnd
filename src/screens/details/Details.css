@@ -1,0 +1,41 @@
+.details-header-bg{
+    height: 300px;
+    background-color: grey;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+ .restaurant-image{
+    height: 250px;
+    width: 250px;
+}
+
+ .menu-cart-items{
+    padding: 50px;
+    display: flex;
+    flex-direction: row;
+    align-items: top;
+}
+
+ .menu-items{
+    width: 1000px;
+}
+
+ .category-name{
+    text-transform: uppercase;
+}
+
+ .veg-item-color{
+ color: green;
+}
+
+ .non-veg-item-color{
+    color: red;
+}
+
+
+ .my-cart{
+    margin: 30px 60px auto auto;
+    width: 400px;
+}
