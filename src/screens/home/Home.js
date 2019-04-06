@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
 import './Home.css';
 import Header from '../../common/header/Header';
 import { GridListTile, Typography } from '@material-ui/core';
@@ -7,8 +6,6 @@ import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import GridList from '@material-ui/core/GridList';
 import { withStyles } from '@material-ui/core/styles';
-import Details from '../details/Details';
-
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faRupeeSign } from '@fortawesome/free-solid-svg-icons';
@@ -79,14 +76,15 @@ class Home extends Component {
                 });
              }
         });
-        xhr.open("GET", "http://localhost:8085/api/restaurant");
+        xhr.open("GET", "http://localhost:8080/api/restaurant");
         xhr.send(data);
     }
 
     /* This function is called on click of card and it redirects to details page corresponding to the restaurant selected  */
     showRestaurantDetails(restaurantId)
-    {
-        ReactDOM.render(<Details   id={restaurantId}  />, document.getElementById('root'));
+    { 
+        this.props.history.push('/restaurant/'+restaurantId);
+
     }
 
     // Calling in on clicking search
