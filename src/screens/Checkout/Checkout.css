@@ -1,0 +1,56 @@
+.tabs {
+    background-color: #3f51b5;
+    color: white;
+}
+
+.text {
+    font-size: 20px;
+}
+
+/*dispNone class contains the style properties of username & password in Login.js*/
+.dispNone {
+    display: none;
+}
+/*dispBlock class contains the style properties of <header> tag in Login.js*/
+ .dispBlock {
+    display: block;
+}
+
+.dispFlex {
+    width: 800px;
+}
+
+.order-body-container {
+    display: flex;
+    justify-content: flex-end;
+}
+
+.main-body-container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.body-container {
+    display: flex;
+    justify-content: center;
+}
+
+.div-container {
+    margin: 8px;
+}
+
+.orderSummary {
+    float: right;
+    width: 500px;
+    margin-left: 80px;
+}
+
+.selectionGrid {
+    border: 3px solid red;
+    box-shadow: 8px 8px red;
+    border-radius: 5px;
+}
+
+.green {
+    color: green;
+}

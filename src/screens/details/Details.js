@@ -17,6 +17,10 @@ import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
 
+import Checkout from '../Checkout/Checkout';
+import ReactDOM from 'react-dom';
+
+
 import './Details.css';
 library.add(faStar);
 library.add(faRupeeSign);
@@ -165,7 +169,7 @@ class Details extends Component {
     }
 
     componentWillMount() {
-        {/**API to fetch restaurant Details*/ }
+        /**API to fetch restaurant Details*/ 
         let xhr = new XMLHttpRequest();
         let that = this;
         xhr.addEventListener("readystatechange", function () {
@@ -175,7 +179,7 @@ class Details extends Component {
                 });
             }
         });
-        {/**Extracted Dynamically passed restaurantId from params */ }
+        /**Extracted Dynamically passed restaurantId from params */ 
         xhr.open("GET", "http://localhost:8080/api/restaurant/" + this.props.id);
         xhr.send();
     } 
@@ -238,8 +242,7 @@ class Details extends Component {
 
     onClickCheckoutButton = state => () => {
         // this.setState({ open: true, ...state });
-
-
+       ReactDOM.render(<Checkout />, document.getElementById('root'));
     };
 
     handleClose = () => {

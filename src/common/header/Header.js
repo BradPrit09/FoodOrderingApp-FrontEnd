@@ -22,69 +22,47 @@ import ReactDOM from 'react-dom';
 import './Header.css';
 
 const styles = theme => ({
-    root: {
-        width: '100%',
-    },
-    menuroot: {
-        display: 'flex',
-    },
 
-    profileicon: {
-        marginRight: theme.spacing.unit,
-        fontSize: 20,
+  root: {
+    width: '100%',
+  },
+  menuroot: {
+    display: 'flex',
+  },
+  search: {
+    position: 'relative',
+    borderRadius: '4px',
+    backgroundColor: '#263238',
+    width: '300px',
+    left: '35%',
+  },
+  searchIcon: {
+    width: theme.spacing.unit * 6,
+    height: '100%',
+    position: 'absolute',
+    pointerEvents: 'none',
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    color: '#fff',
+  },
+  inputRoot: {
+    width: '100%',
+  },
+  inputInput: {
+    paddingTop: theme.spacing.unit,
+    paddingRight: theme.spacing.unit,
+    paddingBottom: theme.spacing.unit,
+    paddingLeft: theme.spacing.unit * 5,
+    color:'#fff',
+    transition: theme.transitions.create('width'),
+    width: '100%',
+    [theme.breakpoints.up('sm')]: {
+      width: 250,
+      '&:focus': {
+        width: 250,
+      },
 
-    },
-    search: {
-        position: 'relative',
-        borderRadius: '4px',
-        backgroundColor: '#263238',
-        width: '300px',
-        left: '36%',
-    },
-    searchIcon: {
-        width: theme.spacing.unit * 6,
-        height: '100%',
-        position: 'absolute',
-        pointerEvents: 'none',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        color: '#fff',
-    },
-    inputRoot: {
-        width: '100%',
-    },
-    inputInput: {
-        paddingTop: theme.spacing.unit,
-        paddingRight: theme.spacing.unit,
-        paddingBottom: theme.spacing.unit,
-        paddingLeft: theme.spacing.unit * 5,
-        color: '#fff',
-        transition: theme.transitions.create('width'),
-        width: '100%',
-        [theme.breakpoints.up('sm')]: {
-            width: 250,
-            '&:focus': {
-                width: 250,
-            },
-        },
-    },
-    iconbtn: {
-        marginRight: 2,
-        marginLeft: 10,
-    },
-    profileiconbtn: {
-        //marginLeft: '66%',
-    },
-    avatar: {
-        width: 24,
-        height: 24,
-    },
-    menuList: {
-        backgroundColor: '#c0c0c0',
-    },
-    menuitem: {
-        padding: '8px',
     },
 });
 
