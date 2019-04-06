@@ -1,37 +1,37 @@
-import React, { Component } from 'react';
+import React, { Component } from './node_modules/react';
 import './Checkout.css';
 import Header from '../../common/header/Header';
-import { GridListTile, Typography } from '@material-ui/core';
-import Card from '@material-ui/core/Card';
-import CardContent from '@material-ui/core/CardContent';
-import GridList from '@material-ui/core/GridList';
-import Stepper from '@material-ui/core/Stepper';
-import StepLabel from '@material-ui/core/StepLabel';
-import Step from '@material-ui/core/Step';
-import StepContent from '@material-ui/core/StepContent';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
-import Divider from '@material-ui/core/Divider';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import FormControl from '@material-ui/core/FormControl';
-import Input from '@material-ui/core/Input';
-import InputLabel from '@material-ui/core/InputLabel';
-import FormHelperText from '@material-ui/core/FormHelperText';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormLabel from '@material-ui/core/FormLabel';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Snackbar from '@material-ui/core/Snackbar';
-import IconButton from '@material-ui/core/IconButton';
-import CheckCircle from '@material-ui/icons/CheckCircle';
-import CloseIcon from '@material-ui/icons/Close';
-import ReactDOM from 'react-dom';
-import Select from '@material-ui/core/Select';
-import MenuItem from '@material-ui/core/MenuItem';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { faCircle } from '@fortawesome/free-solid-svg-icons';
+import { GridListTile, Typography } from './node_modules/@material-ui/core';
+import Card from './node_modules/@material-ui/core/Card';
+import CardContent from './node_modules/@material-ui/core/CardContent';
+import GridList from './node_modules/@material-ui/core/GridList';
+import Stepper from './node_modules/@material-ui/core/Stepper';
+import StepLabel from './node_modules/@material-ui/core/StepLabel';
+import Step from './node_modules/@material-ui/core/Step';
+import StepContent from './node_modules/@material-ui/core/StepContent';
+import Button from './node_modules/@material-ui/core/Button';
+import { withStyles } from './node_modules/@material-ui/core/styles';
+import Divider from './node_modules/@material-ui/core/Divider';
+import Tabs from './node_modules/@material-ui/core/Tabs';
+import Tab from './node_modules/@material-ui/core/Tab';
+import FormControl from './node_modules/@material-ui/core/FormControl';
+import Input from './node_modules/@material-ui/core/Input';
+import InputLabel from './node_modules/@material-ui/core/InputLabel';
+import FormHelperText from './node_modules/@material-ui/core/FormHelperText';
+import Radio from './node_modules/@material-ui/core/Radio';
+import RadioGroup from './node_modules/@material-ui/core/RadioGroup';
+import FormLabel from './node_modules/@material-ui/core/FormLabel';
+import FormControlLabel from './node_modules/@material-ui/core/FormControlLabel';
+import Snackbar from './node_modules/@material-ui/core/Snackbar';
+import IconButton from './node_modules/@material-ui/core/IconButton';
+import CheckCircle from './node_modules/@material-ui/icons/CheckCircle';
+import CloseIcon from './node_modules/@material-ui/icons/Close';
+import ReactDOM from './node_modules/react-dom';
+import Select from './node_modules/@material-ui/core/Select';
+import MenuItem from './node_modules/@material-ui/core/MenuItem';
+import { FontAwesomeIcon } from './node_modules/@fortawesome/react-fontawesome';
+import { library } from './node_modules/@fortawesome/fontawesome-svg-core';
+import { faCircle } from './node_modules/@fortawesome/free-solid-svg-icons';
 
 library.add(faCircle);
 const styles = theme => ({
@@ -327,7 +327,7 @@ class Checkout extends Component {
         const { activeStep } = this.state;
         return (
             <div className="checkout">
-                <Header />
+                <Header  showSearch="false" />
                  <div className="main-body-container">
                     <div>
                     <Stepper activeStep={activeStep} orientation="vertical">
@@ -338,7 +338,7 @@ class Checkout extends Component {
                                 <StepContent>
                                 {index === 0 &&
                                 <div>
-                                <Tabs className="tabs" value={this.state.tabValue} onChange={this.tabChangeHandler}>
+                                <Tabs className="addTabs" value={this.state.tabValue} onChange={this.tabChangeHandler}>
                                     <Tab label="EXISTING ADDRESS" />
                                     <Tab label="NEW ADDRESS" />
                                 </Tabs>

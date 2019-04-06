@@ -256,7 +256,7 @@ class Details extends Component {
 
         return (
             <div>
-                <Header />
+                <Header showSearch="false" />
                 <div>
                     <div className="details-header-bg">
                         <div className="details-restImage">
