@@ -26,6 +26,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import IconButton from '@material-ui/core/IconButton';
 import CheckCircle from '@material-ui/icons/CheckCircle';
 import CloseIcon from '@material-ui/icons/Close';
+import ReactDOM from 'react-dom';
 
 const styles = theme => ({
     root: {
@@ -89,6 +90,7 @@ class Checkout extends Component {
             activeStep: 0,
             flat:"",
             city:"",
+            open: false,
             locality:"",
             zipcode:"",
             statename:"",
@@ -216,7 +218,7 @@ class Checkout extends Component {
 
     componentWillMount() {
 
-        // get restaurant data
+        // get address data
         let data = null;
         let xhr = new XMLHttpRequest();
         let xhr1 = new XMLHttpRequest();
@@ -324,13 +326,19 @@ class Checkout extends Component {
     }
 
     changeHandler = () => {
-       // ReactDOM.render(<Checkout />);
+      ReactDOM.render(<Checkout />, document.getElementById('root'));
     }
 
     iconClickHandler = () => {
         this.setState({ 
             addressClass: "selectionGrid" ,
             iconClass: "green"
+        });
+    }
+
+    snackBarCloseHandler = () => {
+         this.setState({ 
+             open: false 
         });
     }
 
@@ -342,8 +350,15 @@ class Checkout extends Component {
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
                 that.setState({
+                    open:true,
                     orderNotificationMessage : "Your order has been placed successfully!"            
                 });        
+             }
+             else {
+                that.setState({
+                    open: true,
+                    orderNotificationMessage : "Unable to place your order! Please try again!"            
+                });  
              }
         });
 
@@ -525,7 +540,7 @@ class Checkout extends Component {
                                     <span className="div-container">{this.state.totalCartItemsValue}</span>
                                     </div>
                                     <br />
-                                    <Button className="div-container" variant="contained" onClick={this.confirmOrderHandler} color="primary">
+                                    <Button className="button-container" style={{marginLeft:'140px'}} variant="contained" onClick={this.confirmOrderHandler} color="primary">
                                         Place Order
                                     </Button>
                                     <Snackbar
@@ -545,6 +560,7 @@ class Checkout extends Component {
                                             aria-label="Close"
                                             color="inherit"
                                             className={classes.close}
+                                            onClick={this.snackBarCloseHandler}
                                             >
                                             <CloseIcon />
                                             </IconButton>,
