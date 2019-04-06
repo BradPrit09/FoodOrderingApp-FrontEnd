@@ -16,6 +16,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faStar } from '@fortawesome/free-solid-svg-icons';
 import { faRupeeSign } from '@fortawesome/free-solid-svg-icons';
 import { library } from '@fortawesome/fontawesome-svg-core';
+
 import './Details.css';
 library.add(faStar);
 library.add(faRupeeSign);
@@ -41,6 +42,7 @@ class Details extends Component {
             cartNotificationMessage: '',
             cartItems: [],
             totalCartItemsValue: 0,
+            display: "AVERAGE RATING BY",
             // restaurantDetails: '',
             restaurantDetails: {
                 "id": 1,
@@ -169,14 +171,14 @@ class Details extends Component {
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
                 that.setState({
-                    restaurantDetails: JSON.parse(this.responseText)
+                  //  restaurantDetails: JSON.parse(this.responseText)
                 });
             }
         });
         {/**Extracted Dynamically passed restaurantId from params */ }
         xhr.open("GET", "http://localhost:8080/api/restaurant/" + this.props.id);
         xhr.send();
-    }
+    } 
 
     addMenuItemClickHandler = (item) => {
         //set new attribute quantity for the cart
@@ -265,8 +267,7 @@ class Details extends Component {
                                 <Typography gutterBottom variant="h4" component="h2">
                                     {restaurantDetails.restaurantName}
                                 </Typography>
-                                <br />
-                                {/*  <Typography>{restaurantDetails.address.locality}</Typography>  */}
+                                <Typography  variant="h8">{restaurantDetails.address.locality}</Typography>  
                                 <br />
                                 <Typography variant="h6" gutterBottom>
                                     {restaurantDetails.categories.map(category => (
@@ -277,7 +278,7 @@ class Details extends Component {
                             <div className="details-rating-price">
                                 <div className="details-users">
                                     <div>
-                                        <FontAwesomeIcon icon="star" size="lg" />
+                                        <FontAwesomeIcon icon="star" />
                                         <span className="details-rating">{restaurantDetails.userRating}</span>
                                     </div>
                                     <div>
@@ -291,11 +292,11 @@ class Details extends Component {
                                 </div>
                                 <div className="details-pricing">
                                     <div className="details-price">
-                                        <FontAwesomeIcon icon="rupee-sign" size="lg" />
+                                        <FontAwesomeIcon icon="rupee-sign" />
                                         <span className="details-rating">{restaurantDetails.avgPrice * 2}</span>
                                     </div>
                                     <div className="details-price">
-                                        <Typography variant="caption">AVERAGECOSTFOR TWOPEOPLE</Typography>
+                                        <Typography variant="caption">AVERAGECOSTFOR TWO PEOPLE</Typography>
                                     </div>
                                 </div>
                             </div>
@@ -305,19 +306,21 @@ class Details extends Component {
                         <div className="menu-items">
                             {restaurantDetails.categories.map(category => (
                                 <div key={"categoryItems" + category.id}>
-                                    <h2 className="category-name">{category.categoryName}
+                                    <h3 className="category-name">{category.categoryName} </h3>
                                         <Divider />
-                                    </h2>
+                                    <br/>
                                     {category.items.map(item => (
                                         <div key={"item" + item.id}>
-                                            <span>{item.type == 'Veg' &&
+                                            <span>{item.type === 'Veg' &&
                                                 <i className="fa fa-stop-circle-o veg-item-color" aria-hidden="true"></i>}
-                                                {item.type == 'Non-Veg' &&
+                                                {item.type === 'Non-Veg' &&
                                                     <i className="fa fa-stop-circle-o non-veg-item-color" aria-hidden="true"></i>}
                                             </span>
                                             <span>{item.itemName}</span>
-                                            <span>{item.price}</span>
-                                            <span>
+
+                                            <span className = "cart-price"> <FontAwesomeIcon icon="rupee-sign" />
+                                            {item.price}</span>
+                                            <span className = "cart-button">
                                                 <IconButton
                                                     key="close"
                                                     aria-label="Close"
@@ -336,14 +339,14 @@ class Details extends Component {
                                     <Typography gutterBottom variant="h5" component="h2">
                                         <Badge badgeContent={this.state.cartItems.length} color="primary" classes={{ badge: classes.margin }}>
                                             <ShoppingCart />
-                                        </Badge>
-                                        My Cart
+                                        </Badge> 
+                                        <span classname="cart-display"> MY CART</span>
                                     </Typography>
                                     {this.state.cartItems.map(item => (
                                         <div key={"item" + item.id}>
-                                            <span>{item.type == 'Veg' &&
+                                            <span>{item.type === 'Veg' &&
                                                 <i className="fa fa-stop-circle-o veg-item-color" aria-hidden="true"></i>}
-                                                {item.type == 'Non-Veg' &&
+                                                {item.type === 'Non-Veg' &&
                                                     <i className="fa fa-stop-circle-o non-veg-item-color" aria-hidden="true"></i>}
                                             </span>
                                             <span>{item.itemName}</span>
@@ -366,10 +369,15 @@ class Details extends Component {
                                                     <Add />
                                                 </IconButton>
                                             </span>
-                                            <span>{item.totalPrice}</span>
+                                            <FontAwesomeIcon icon="rupee-sign" />
+                                            <span> {item.totalPrice * item.quantity}</span>
+                                            
                                         </div>
-                                    ))}
-                                    TOTAL AMOUNT {this.state.totalCartItemsValue}
+                                        
+                                    )) }
+                                    <br />
+                                    TOTAL AMOUNT   <FontAwesomeIcon icon="rupee-sign" />   {this.state.totalCartItemsValue}
+                                    <br />
                                     <br />
                                     <Button variant="contained" color="primary"
                                         onClick={this.onClickCheckoutButton({ vertical: 'bottom', horizontal: 'left' })}>
