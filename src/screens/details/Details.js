@@ -44,9 +44,10 @@ class Details extends Component {
             cartNotificationMessage: '',
             cartItems: [],
             totalCartItemsValue: 0,
-            display: "AVERAGE RATING BY",
-            // restaurantDetails: '',
-            restaurantDetails: {
+             restaurantDetails: '',
+             address : '',
+             categories : []
+          /* restaurantDetails: {
                 "id": 1,
                 "restaurantName": "Dominoz",
                 "photoUrl": "https://b.zmtcdn.com/data/pictures/4/18528394/6c3590212b3700b1b160422fd8478287.jpg?output-format=webp",
@@ -162,7 +163,7 @@ class Details extends Component {
                         ]
                     }
                 ]
-            }
+           } */
         }
     }
 
@@ -172,13 +173,30 @@ class Details extends Component {
         let that = this;
         xhr.addEventListener("readystatechange", function () {
             if (this.readyState === 4) {
+                console.log(JSON.parse(this.responseText));
+                console.log("address"  + JSON.parse(this.responseText).address  );
                 that.setState({
-                  //  restaurantDetails: JSON.parse(this.responseText)
+                  
+                  restaurantDetails: JSON.parse(this.responseText),
+                  address : JSON.parse(this.responseText).address, 
+                  categories: JSON.parse(this.responseText).categories,
+                  /*
+                      date: moment(Number(dateReceived)).format("DD/MM/YYYY hh:mm:ss"),
+                    uploaded_pics: JSON.parse(this.responseText).data,
+                    images: JSON.parse(this.responseText).data,
+                    hashtags: JSON.parse(this.responseText).data.tags,
+                    likes: JSON.parse(this.responseText).data.likes,
+                    id: JSON.parse(this.responseText).data.id,
+                    url: JSON.parse(this.responseText).data[0].images.standard_resolution.url
+                  */
+                  
                 });
             }
         });
+
+
         /**Extracted Dynamically passed restaurantId from params */ 
-        xhr.open("GET", "http://localhost:8085/api/restaurant/" + this.props.id);
+        xhr.open("GET", "http://localhost:8080/api/restaurant/" + this.props.match.params.restaurantID);
         xhr.send();
     } 
 
@@ -253,15 +271,18 @@ class Details extends Component {
         const { classes } = this.props;
         let restaurantDetails = this.state.restaurantDetails;
         console.log(restaurantDetails);
+        console.log("HERE");
+        console.log(restaurantDetails.photoUrl);
+
 
         return (
             <div>
-                <Header showSearch="false" />
+                <Header showSearch="false"/>
                 <div>
                     <div className="details-header-bg">
                         <div className="details-restImage">
                             <span>
-                                <img className="restaurant-image" src={restaurantDetails.photoUrl} alt="RestaurantImage" />
+                                <img className="restaurant-image" src={this.state.restaurantDetails.photoUrl} alt="RestaurantImage" />
                             </span>
                         </div>
                         <div className="details-restDetails">
@@ -270,10 +291,10 @@ class Details extends Component {
                                 <Typography gutterBottom variant="h4" component="h2">
                                     {restaurantDetails.restaurantName}
                                 </Typography>
-                                <Typography  variant="h8">{restaurantDetails.address.locality}</Typography>  
+                                <Typography  variant="h8">{this.state.address.locality}</Typography>  
                                 <br />
                                 <Typography variant="h6" gutterBottom>
-                                    {restaurantDetails.categories.map(category => (
+                                    {this.state.categories.map(category => (
                                         <span key={"category" + category.id}>{category.categoryName}, </span>
                                     ))}
                                 </Typography>
@@ -307,7 +328,7 @@ class Details extends Component {
                     </div>
                     <div className="menu-cart-items">
                         <div className="menu-items">
-                            {restaurantDetails.categories.map(category => (
+                            {this.state.categories.map(category => (
                                 <div key={"categoryItems" + category.id}>
                                     <h3 className="category-name">{category.categoryName} </h3>
                                         <Divider />
@@ -343,7 +364,7 @@ class Details extends Component {
                                         <Badge badgeContent={this.state.cartItems.length} color="primary" classes={{ badge: classes.margin }}>
                                             <ShoppingCart />
                                         </Badge> 
-                                        <span classname="cart-display"> MY CART</span>
+                                        <span className="cart-display"> MY CART</span>
                                     </Typography>
                                     {this.state.cartItems.map(item => (
                                         <div key={"item" + item.id}>
