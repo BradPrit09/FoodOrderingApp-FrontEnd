@@ -90,7 +90,7 @@ const styles = theme => ({
 
 const customStyles = {
     content: {
-        top: '15%',
+        top: '10%',
         left: '40%',
         right: '40%',
         bottom: 'auto',
@@ -130,9 +130,9 @@ class Header extends Component {
             loginPassword: "",
             firstnameRequired: "dispNone",
             firstname: "",
-            lastnameRequired: "dispNone",
             lastname: "",
             emailRequired: "dispNone",
+            emailValid: "dispNone",
             email: "",
             registerPasswordRequired: "dispNone",
             registerPassword: "",
@@ -167,7 +167,7 @@ class Header extends Component {
             var accessToken = "";
 
             xhr.addEventListener("readystatechange", function () {
-                if (this.readyState === 4 && this.status === 200 ) {
+                if (this.readyState === 4 && this.status === 200) {
 
                     sessionStorage.setItem('access-token', xhr.getResponseHeader("access-token"));
                     console.log(JSON.parse(xhr.responseText));
@@ -175,10 +175,17 @@ class Header extends Component {
                     that.setState({
                         loggedIn: true,
                         snackbarOpen: true,
-                        message:"Logged in successfully!",
+                        message: "Logged in successfully!",
                     });
                     that.closeModalHandler();
                     ReactDOM.render(<Home />, document.getElementById('root'));
+                }
+                else {
+                    that.setState({
+                        loggedIn: false,
+                        snackbarOpen: true,
+                        message: "Logged in successfully!",
+                    });
                 }
             });
 
@@ -196,35 +203,41 @@ class Header extends Component {
     registerClickHandler = () => {
 
         this.state.firstname === "" ? this.setState({ firstnameRequired: "dispBlock" }) : this.setState({ firstnameRequired: "dispNone" });
-        this.state.lastname === "" ? this.setState({ lastnameRequired: "dispBlock" }) : this.setState({ lastnameRequired: "dispNone" });
         this.state.email === "" ? this.setState({ emailRequired: "dispBlock" }) : this.setState({ emailRequired: "dispNone" });
         this.state.registerPassword === "" ? this.setState({ registerPasswordRequired: "dispBlock" }) : this.setState({ registerPasswordRequired: "dispNone" });
         this.state.contact === "" ? this.setState({ contactRequired: "dispBlock" }) : this.setState({ contactRequired: "dispNone" });
 
-        if (this.state.contactRequired === "dispNone" && this.state.registerPasswordRequired === "dispNone"
-            && this.state.emailRequired === "dispNone" && this.state.firstnameRequired === "dispNone"
-            && this.state.lastnameRequired === "dispNone") {
+        if (this.state.contactRequired === "dispBlock" && this.state.registerPasswordRequired === "dispBlock"
+            && this.state.emailRequired === "dispBlock" && this.state.firstnameRequired === "dispBlock") {
 
-        
-            let xhrSignup = new XMLHttpRequest();
-            let that = this;
-            xhrSignup.addEventListener("readystatechange", function () {
-                if (this.readyState === 4 && this.status === 200 ) {
-                    that.setState({
-                        registrationSuccess: true,
-                        snackbarOpen: true,
-                        message:"Registered successfully! Please login now!",
-                    });
-                    that.openModalHandler();
-                    ReactDOM.render(<Home />, document.getElementById('root'));
-                }
-            });
-
-            xhrSignup.open("POST", "http://localhost:8080/api/user/signup?firstName="
-            +this.state.firstname+"&lastName="+this.state.lastname+"&email="+this.state.email
-            +"&contactNumber="+this.state.contact+"&password="+this.state.registerPassword);
-            xhrSignup.setRequestHeader("Content-Type", "application/jason;CharSet=UTF-8");
-            xhrSignup.send();
+            let number_pattern = "[0-9]";
+            
+           // if (this.state.contact.match(number_pattern) && this.state.contact.length === 10) {
+                
+                
+                 let xhrSignup = new XMLHttpRequest();
+                 let that = this;
+                 xhrSignup.addEventListener("readystatechange", function () {
+                     if (this.readyState === 4 && this.status === 200 ) {
+                         that.setState({
+                             registrationSuccess: true,
+                             snackbarOpen: true,
+                             message:"Registered successfully! Please login now!",
+                         });
+                         that.openModalHandler();
+                         ReactDOM.render(<Home />, document.getElementById('root'));
+                     }
+                 });
+     
+                 xhrSignup.open("POST", "http://localhost:8080/api/user/signup?firstName="
+                 +this.state.firstname+"&lastName="+this.state.lastname+"&email="+this.state.email
+                 +"&contactNumber="+this.state.contact+"&password="+this.state.registerPassword);
+                 xhrSignup.setRequestHeader("Content-Type", "application/jason;CharSet=UTF-8");
+                 xhrSignup.send();
+           /* }
+            else {
+                console.log("invalid number");
+            }*/
         }
     }
 
@@ -239,7 +252,6 @@ class Header extends Component {
     }
 
     inputLastNameChangeHandler = (e) => {
-        this.state.lastname === "" ? this.setState({ lastnameRequired: "dispBlock" }) : this.setState({ lastnameRequired: "dispNone" });
         this.setState({ lastname: e.target.value });
     }
 
@@ -404,7 +416,7 @@ class Header extends Component {
                                 </FormHelperText>
                             </FormControl>
                             <br /><br />
-                            <FormControl required>
+                            <FormControl>
                                 <InputLabel htmlFor="lastname">Last Name</InputLabel>
                                 <Input id="lastname" type="text" lastname={this.state.lastname} onChange={this.inputLastNameChangeHandler} />
                                 <FormHelperText className={this.state.lastnameRequired}>
